@@ -79,7 +79,7 @@ const Auth = () => {
                     </div>
                   </div>
                 </dialog>
-                <button disabled={agreed} type="submit" className="roboto btn btn-success w-100 mt-4 py-2 px-4 rounded tw-font-normal tw-text-white roboto tw-transition tw-duration-300">Daftar</button>
+                <button disabled={agreed} type="submit" className="roboto btn btn-success w-100 mt-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Daftar</button>
               </form>
               {/* Login */}
               <form className={`w-100 px-4 tw-absolute text-center tw-transition tw-duration-300 ${page === "Login" && "tw-translate-x-[100vw]"}`}>
