@@ -12,7 +12,7 @@ const Auth = () => {
             {/* Aside content */}
             <aside className="tw-h-full col-12 pb-5 pb-lg-0 col-lg-4 d-flex flex-column justify-content-center align-items-center">
                 <MouseParallaxChild className="p-4" factorX={0.3} factorY={0.5}>
-                  <div className="roboto">
+                  <div className="poppins">
                     <h1 className="fs-1 fw-bold text-center px-4">
                       <span className="tw-text-[#65B741]">onStudy</span>
                       <span className="tw-text-[#F5EFE6]">, Belajar jadi lebih seru!</span>
@@ -28,7 +28,7 @@ const Auth = () => {
               <div className="tw-relative w-100 tw-h-[56vh] d-flex justify-content-center align-items-center">
               {/* Sign Up */}
               <form className={`w-100 px-4 tw-absolute tw-transition tw-duration-300 ${page === "SignUp" && "tw-translate-x-[100vw]"}`}>
-                <h1 className="fs-2 mb-5 fw-bold">Daftar</h1>
+                <h1 className="fs-2 mb-5 fw-bold poppins">Daftar</h1>
                 <div className="mb-3">
                   <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control"/>
                 </div>
