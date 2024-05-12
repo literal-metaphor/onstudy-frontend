@@ -25,9 +25,9 @@ const Auth = () => {
             </aside>
             {/* Main form */}
             <main className="tw-h-full col-12 col-lg-8 p-5 d-flex flex-column justify-content-center align-items-center lg:tw-rounded-l-3xl tw-bg-[#fff]">
-              <div className="tw-relative w-100 tw-h-[56vh] d-flex justify-content-center align-items-center">
+              <div className="position-relative w-100 h-100 d-flex justify-content-center align-items-center">
               {/* Sign Up */}
-              <form className={`w-100 px-4 tw-absolute tw-transition tw-duration-300 ${page === "SignUp" && "tw-translate-x-[100vw]"}`}>
+              <form className={`w-100 px-4 tw-transition tw-duration-300 ${page === "SignUp" && "tw-translate-x-[100vw] position-absolute"}`}>
                 <h1 className="fs-2 mb-5 fw-bold">Daftar</h1>
                 <div className="mb-3">
                   <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control"/>
@@ -82,7 +82,7 @@ const Auth = () => {
                 <button disabled={agreed} type="submit" className="roboto btn btn-success w-100 mt-4 py-2 px-4 rounded tw-font-normal tw-text-white roboto tw-transition tw-duration-300">Daftar</button>
               </form>
               {/* Login */}
-              <form className={`w-100 px-4 tw-absolute text-center tw-transition tw-duration-300 ${page === "Login" && "tw-translate-x-[100vw]"}`}>
+              <form className={`w-100 px-4 text-center tw-transition tw-duration-300 ${page === "Login" && "tw-translate-x-[100vw] position-absolute"}`}>
                 <h1 className="fs-2 mb-5 fw-bold text-start">Login</h1>
                 <div className="mb-3">
                   <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control"/>
@@ -97,10 +97,10 @@ const Auth = () => {
               {/* Divider */}
               <div className="tw-divider py-4 roboto">Atau</div>
               {/* Third-Party */}
-              <div className="d-flex justify-content-center align-items-center">
-                <button className="tw-btn tw-btn-ghost mx-4"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
-                <button className="tw-btn tw-btn-ghost mx-4"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
-                <button className="tw-btn tw-btn-ghost mx-4"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
+              <div className="d-flex justify-content-center align-items-center flex-wrap">
+                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
+                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
+                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
               </div>
               <br />
               {/* Change Page */}
