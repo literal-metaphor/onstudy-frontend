@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { api } from "../utils/API";
 
+function clearAuthData() {
+  localStorage.removeItem('userId');
+  localStorage.removeItem('token');
+}
+
 export default function Guard() {
   const [auth, setAuth] = useState(null);
 
@@ -27,12 +32,6 @@ export default function Guard() {
       setAuth(false);
       clearAuthData();
     }
-  });
-
-function clearAuthData() {
-  localStorage.removeItem('userId');
-  localStorage.removeItem('token');
-}
   }, []);
 
   useEffect(() => {
@@ -40,15 +39,17 @@ function clearAuthData() {
 
     const publicRoutes = ['/', '/auth'];
     const path = window.location.pathname;
+    
     if (!publicRoutes.includes(path) && path !== "/app") {
-      window.location.pathname = ('/app');
+      window.location.pathname = '/app';
     }
-    if (auth === false && !publicRoutes.includes(path)) {
-      window.location.pathname = ('/auth');
-    } else if (auth === true && publicRoutes.includes(path)) {
-      window.location.pathname = ('/app')
-    }
-  }, [auth]);
 
-  return null;
+     if (auth === false && !publicRoutes.includes(path)) { 
+       window.location.pathname = '/auth'; 
+     } else if (auth === true && publicRoutes.includes(path)) { 
+       window.location.pathname= '/app' 
+     }
+   }, [auth]);
+
+   return null;
 }
