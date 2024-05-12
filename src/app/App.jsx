@@ -55,7 +55,7 @@ const App = () => {
                   </a>
                 </li>
               </ul>
-              <button onClick={() => {localStorage.clear();window.location.pathname('/')}} className="tw-btn tw-btn-ghost mx-auto mt-auto mb-4">
+              <button onClick={() => {localStorage.clear();window.location.pathname=('/')}} className="tw-btn tw-btn-ghost mx-auto mt-auto mb-4">
                 <img src="Dashboard/logout.svg" alt="Logout" />
               </button>
             </nav>

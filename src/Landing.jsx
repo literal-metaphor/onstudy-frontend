@@ -34,6 +34,10 @@ const Landing = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="tw-bg-[#F8F9FA]">
       {/* Header and navbar */}
@@ -93,7 +97,7 @@ const Landing = () => {
                   Belajar hal baru seharusnya menjadi pengalaman yang <span className="fw-bold">mengasyikkan</span>, namun pada kenyataannya, seringkali <span className="fw-bold text-danger">berbanding terbalik</span>. Dengan <span className="fw-semibold tw-text-[#28A745]">onStudy</span>, kamu dapat menciptakan lingkungan belajar yang <span className="fw-bold">menarik</span>, <span className="fw-bold">interaktif</span>, dan <span className="fw-bold">efektif</span>. 📚✨
                 </p>
                 <div className="d-flex justify-content-center justify-content-lg-start align-items-center align-self-lg-start px-3 px-lg-0">
-                  <a href="#" className="btn btn-lg fs-6 mx-2 mx-lg-0 me-lg-4 tw-text-white btn-success">Coba sekarang!</a>
+                  <a href={`${window.location.origin}/auth`} className="btn btn-lg fs-6 mx-2 mx-lg-0 me-lg-4 tw-text-white btn-success">Coba sekarang!</a>
                   <a href="#fitur" className="btn btn-lg fs-6 mx-2 mx-lg-0 btn-outline-success">Lihat lebih lanjut</a>
                 </div>
               </motion.div>
@@ -114,7 +118,7 @@ const Landing = () => {
           <p className="mb-4 text-center text-lg-start">Kamu bakal dapet apa aja?</p>
           <br/>
           <div className="row">
-            <motion.div ref={fiturCard1Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard1Control} transition={{duration: 0.5, delay: 0.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
+            <motion.div ref={fiturCard1Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard1Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 0.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
               <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#FBCA6B] tw-to-[#fff]">
                 <img src="Landing/Fitur1.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[200px] tw-m-auto" alt="Ruang kelas virtual"/>
                 <div className="card-body">
@@ -123,7 +127,7 @@ const Landing = () => {
                 </div>
               </Tilt>
             </motion.div>
-            <motion.div ref={fiturCard2Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard2Control} transition={{duration: 0.5, delay: 0.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
+            <motion.div ref={fiturCard2Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard2Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 1}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
               <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#B8C7FF] tw-to-[#fff]">
                 <img src="Landing/Fitur2.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[200px] tw-m-auto" alt="Forum guru dan siswa"/>
                 <div className="card-body">
@@ -132,7 +136,7 @@ const Landing = () => {
                 </div>
               </Tilt>
             </motion.div>
-            <motion.div ref={fiturCard3Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard3Control} transition={{duration: 0.5, delay: 0.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
+            <motion.div ref={fiturCard3Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard3Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 1.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
               <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#EBCC99] tw-to-[#fff]">
                 <img src="Landing/Fitur3.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[189px] tw-m-auto" alt="Rapor virtual"/>
                 <div className="card-body">
