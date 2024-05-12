@@ -10,6 +10,7 @@ const Router = () => {
       <Routing>
         <Routes>
           <Route path="/app" element={<App />} />
+          <Route path="/devapp" element={<App />} />
           <Route path="/auth" element={<Auth />} />
         </Routes>
       </Routing>
