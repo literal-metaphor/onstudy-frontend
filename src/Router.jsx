@@ -7,7 +7,10 @@ import Landing from "./Landing";
 const Router = () => {
   return (
     <>
-      <Guard/>
+      // Moved inside Routing for proper context
+      <Routing>
+        <Guard/>
+        <Routes>
       <Routing>
         <Routes>
           <Route exact path="/" Component={Landing} />
