@@ -21,14 +21,18 @@ export default function Guard() {
       .catch((err) => {
         console.error(err);
         setAuth(false);
-        localStorage.removeItem('userId');
-        localStorage.removeItem('token');
+        clearAuthData();
       });
     } else {
       setAuth(false);
-      localStorage.removeItem('userId');
-      localStorage.removeItem('token');
+      clearAuthData();
     }
+  });
+
+function clearAuthData() {
+  localStorage.removeItem('userId');
+  localStorage.removeItem('token');
+}
   }, []);
 
   useEffect(() => {
