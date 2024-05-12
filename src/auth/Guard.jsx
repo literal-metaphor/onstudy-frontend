@@ -10,7 +10,7 @@ export default function Guard() {
     const isAuthenticated = userId !== null && token !== null;
 
     if (isAuthenticated) {
-      api.get(`/auth/verifyauth`, {
+      api.post(`/auth/verifyauth`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -34,12 +34,15 @@ export default function Guard() {
   useEffect(() => {
     if (auth === null) return;
 
-    const publicRoutes = ['/auth', '/devapp'];
+    const publicRoutes = ['/auth'];
     const path = window.location.pathname;
+    if (!publicRoutes.includes(path) && path !== "/app") {
+      window.location.pathname = ('/app');
+    }
     if (auth === false && !publicRoutes.includes(path)) {
       window.location.pathname = ('/auth');
     } else if (auth === true && publicRoutes.includes(path)) {
-      window.location.pathname = ('/app');
+      window.location.pathname = ('/app')
     }
   }, [auth]);
 
