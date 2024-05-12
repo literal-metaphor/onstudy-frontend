@@ -29,16 +29,16 @@ const Auth = () => {
               {/* Sign Up */}
               <form className={`w-100 px-4 tw-transition tw-duration-300 ${page === "SignUp" && "tw-translate-x-[100vw] position-absolute"}`}>
                 <h1 className="fs-2 mb-5 fw-bold">Daftar</h1>
-                <div className="mb-3">
-                  <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control"/>
+                <div className="mb-4">
+                  <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <div className="mb-3">
-                  <input name="username" placeholder="Username" autoComplete="new-password" type="text" className="form-control"/>
+                <div className="mb-4">
+                  <input name="username" placeholder="Username" autoComplete="new-password" type="text" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <div className="mb-3">
-                  <input name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control"/>
+                <div className="mb-4">
+                  <input name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <div className="mb-3 form-check">
+                <div className="mb-4 form-check">
                   <input onClick={()=>setAgreed(!agreed)} autoComplete="new-password" type="checkbox" className="form-check-input hover:tw-cursor-pointer" checked={!agreed}/>
                   <label className="form-check-label hover:tw-cursor-pointer roboto"><span onClick={()=>setAgreed(!agreed)}>Saya menyutujui</span> <span className="text-primary" onClick={()=>document.getElementById('tos_modal').showModal()}>Persyaratan Layanan onStudy</span></label>
                 </div>
@@ -85,10 +85,10 @@ const Auth = () => {
               <form className={`w-100 px-4 text-center tw-transition tw-duration-300 ${page === "Login" && "tw-translate-x-[100vw] position-absolute"}`}>
                 <h1 className="fs-2 mb-5 fw-bold text-start">Login</h1>
                 <div className="mb-3">
-                  <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control"/>
+                  <input name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
                 <div className="mb-3">
-                  <input name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control"/>
+                  <input name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
                 <button type="submit" className="roboto btn btn-success w-100 my-4 py-2 px-4 rounded tw-font-normal tw-text-white roboto tw-transition tw-duration-300">Masuk</button>
                 <a className="text-primary roboto" href="#">Lupa Password?</a>
@@ -98,17 +98,17 @@ const Auth = () => {
               <div className="tw-divider py-4 roboto">Atau</div>
               {/* Third-Party */}
               <div className="d-flex justify-content-center align-items-center flex-wrap">
-                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
-                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
-                <button className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
+                <button disabled={agreed && page === "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
+                <button disabled={agreed && page === "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
+                <button disabled={agreed && page === "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
               </div>
               <br />
               {/* Change Page */}
               {page === "Login" && (
-                <p className="roboto">Belum Punya Akun? <span className="hover:tw-cursor-pointer text-primary" onClick={() => setPage("SignUp")}>Daftar</span></p>
+                <p className="roboto">Sudah Punya Akun? <span className="hover:tw-cursor-pointer text-primary" onClick={() => setPage("SignUp")}>Masuk</span></p>
               )}
               {page === "SignUp" && (
-                <p className="roboto">Sudah Punya Akun? <span className="hover:tw-cursor-pointer text-primary" onClick={() => setPage("Login")}>Masuk</span></p>
+                <p className="roboto">Belum Punya Akun? <span className="hover:tw-cursor-pointer text-primary" onClick={() => setPage("Login")}>Daftar</span></p>
               )}
             </main>
           </div>
