@@ -19,19 +19,14 @@ const Landing = () => {
   const fiturCard3Control = useAnimation();
 
   useEffect(() => {
-    if (heroIsInView) {
-      heroControl.start("visible");
-    }
-    if (fiturCard1IsInView) {
-      fiturCard1Control.start("visible");
-    }
-    if (fiturCard2IsInView) {
-      fiturCard2Control.start("visible");
-    }
-    if (fiturCard3IsInView) {
-      fiturCard3Control.start("visible");
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const controls = [heroControl, fiturCard1Control, fiturCard2Control, fiturCard3Control];
+    const isInView = [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView];
+
+    isInView.forEach((view, index) => {
+      if (view) {
+        controls[index].start("visible");
+      }
+    });
   }, [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView]);
 
   useEffect(() => {
