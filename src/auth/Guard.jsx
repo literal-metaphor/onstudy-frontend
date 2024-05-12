@@ -34,7 +34,7 @@ export default function Guard() {
   useEffect(() => {
     if (auth === null) return;
 
-    const publicRoutes = ['/auth'];
+    const publicRoutes = ['/', '/auth'];
     const path = window.location.pathname;
     if (!publicRoutes.includes(path) && path !== "/app") {
       window.location.pathname = ('/app');
