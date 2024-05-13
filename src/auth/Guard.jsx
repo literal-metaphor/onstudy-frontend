@@ -37,18 +37,19 @@ export default function Guard() {
   useEffect(() => {
     if (auth === null) return;
 
-    const publicRoutes = ['/', '/auth'];
+    const publicRoutes = ['/', '/auth', '/devapp'];
     const path = window.location.pathname;
-    
-    if (!publicRoutes.includes(path) && path !== "/app") {
+
+    if (auth === false && !publicRoutes.includes(path)) {
+      window.location.pathname = '/auth';
+    } else if (auth === true && publicRoutes.includes(path)) {
+      window.location.pathname= '/app';
+    } else if (!publicRoutes.includes(path) && path !== "/app") {
       window.location.pathname = '/app';
+    } else {
+      document.getElementById("root").classList.remove("d-none");
     }
 
-     if (auth === false && !publicRoutes.includes(path)) { 
-       window.location.pathname = '/auth'; 
-     } else if (auth === true && publicRoutes.includes(path)) { 
-       window.location.pathname= '/app' 
-     }
    }, [auth]);
 
    return null;
