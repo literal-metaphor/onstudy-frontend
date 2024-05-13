@@ -301,6 +301,7 @@ const Landing = () => {
             </div>
           </div> */}
           <div className="roboto col-12 order-3 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center d-lg-block tw-text-white">
+
             &copy; 2024 Kelompok 4 MejaKita Academy
           </div>
         </div>
