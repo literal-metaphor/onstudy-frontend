@@ -97,7 +97,7 @@ const Landing = () => {
                 </div>
               </motion.div>
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={1} factorY={0.5} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
+            <MouseParallaxChild factorX={0.2} factorY={0.2} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
               <motion.div variants={{hidden: {opacity: 0, x: 50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 1}}>
                 <img src="Landing/Hero.svg" alt="Hero Image" className="tw-w-[280px] tw-h-[280px] align-self-lg-end" />
               </motion.div>
