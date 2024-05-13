@@ -7,8 +7,8 @@ import Landing from "./Landing";
 const Router = () => {
   return (
     <>
-      <Guard/>
       <Routing>
+        <Guard/>
         <Routes>
           <Route exact path="/" Component={Landing} />
           <Route exact path="/app" Component={App} />
