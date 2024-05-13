@@ -27,7 +27,7 @@ const Landing = () => {
         controls[index].start("visible");
       }
     });
-  }, [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView]);
+  }, [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView, heroControl, fiturCard1Control, fiturCard2Control, fiturCard3Control]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
