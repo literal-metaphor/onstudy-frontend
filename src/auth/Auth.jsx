@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { MouseParallaxChild, MouseParallaxContainer } from "react-parallax-mouse";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import "../utils/Firebase";
 import { api } from "../utils/API";
@@ -173,28 +172,29 @@ const Auth = () => {
             </div>
           </div>
         </dialog>
-        <MouseParallaxContainer className="tw-h-full" globalFactorX={0.1} globalFactorY={0.1}>
+        <div className="tw-h-full">
           <div className="row gx-4 tw-h-full">
             {/* Aside content */}
-            <aside className="tw-h-full col-12 pb-5 pb-lg-0 col-lg-4 d-flex flex-column justify-content-center align-items-center">
-                <MouseParallaxChild className="p-4" factorX={0.3} factorY={0.5}>
-                  <div className="roboto">
-                    <h1 className="fs-1 fw-bold text-center px-4">
-                      <span className="tw-text-[#65B741]">onStudy</span>
-                      <span className="tw-text-[#F5EFE6]">, Belajar jadi lebih seru!</span>
-                    </h1>
-                  </div>
-                </MouseParallaxChild>
-                <MouseParallaxChild className="p-4" factorX={0.3} factorY={0.5}>
-                  <img src="Auth/Aside.svg" alt="Study desk / Meja belajar" />
-                </MouseParallaxChild>
+            <aside className="tw-h-full col-12 p-5 my-5 my-lg-0 col-lg-5 d-flex flex-column justify-content-center align-items-center">
+              <div className="p-4">
+                <div className="roboto">
+                  <h1 className="fs-1 fw-bold px-2">
+                    <span className="tw-text-[#65B741]">onStudy,</span>
+                    <br />
+                    <span className="tw-text-[#F5EFE6]">Belajar jadi lebih seru!</span>
+                  </h1>
+                </div>
+              </div>
+              <div className="p-4">
+                <img src="Auth/Aside.svg" alt="Study desk / Meja belajar" />
+              </div>
             </aside>
             {/* Main form */}
-            <main className="tw-h-full col-12 col-lg-8 p-5 d-flex flex-column justify-content-center align-items-center lg:tw-rounded-l-3xl tw-bg-[#fff]">
+            <main className="tw-h-full col-12 col-lg-7 p-5 d-flex flex-column justify-content-center align-items-center lg:tw-rounded-l-3xl tw-bg-[#fff]">
               <div className="position-relative w-100 h-100 d-flex justify-content-center align-items-center">
               {/* Sign Up */}
-              <form onSubmit={HandleSignIn} className={`w-100 px-4 tw-transition tw-duration-300 ${page !== "SignUp" && "tw-translate-x-[100vw] position-absolute"}`}>
-                <h1 className="fs-2 mb-5 fw-bold">Daftar</h1>
+              <form onSubmit={HandleSignIn} className={`d-flex flex-column justify-content-center w-100 px-4 tw-transition tw-duration-300 ${page !== "SignUp" && "tw-translate-x-[100vw] position-absolute"}`}>
+                <h1 className="fs-2 mb-5 fw-bold text-start">Daftar</h1>
                 <div className="mb-4">
                   <input required name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
@@ -208,18 +208,18 @@ const Auth = () => {
                   <input required readOnly onClick={()=>setAgreed(!agreed)} autoComplete="new-password" type="checkbox" className="form-check-input hover:tw-cursor-pointer" checked={agreed}/>
                   <label className="form-check-label hover:tw-cursor-pointer roboto"><span onClick={()=>setAgreed(!agreed)}>Saya menyutujui</span> <span className="text-primary" onClick={()=>document.getElementById('tos_modal').showModal()}>Persyaratan Layanan onStudy</span></label>
                 </div>
-                <button disabled={!agreed} type="submit" className="roboto btn btn-success w-100 mt-4 py-2 px-4 rounded tw-font-normal tw-text-white roboto tw-transition tw-duration-300">Daftar</button>
+                <button disabled={!agreed} type="submit" className="tw-self-center w-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success mt-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Daftar</button>
               </form>
               {/* Login */}
-              <form onSubmit={HandleLogin} className={`w-100 px-4 text-center tw-transition tw-duration-300 ${page !== "Login" && "tw-translate-x-[100vw] position-absolute"}`}>
+              <form onSubmit={HandleLogin} className={`d-flex flex-column justify-content-center w-100 px-4 text-center tw-transition tw-duration-300 ${page !== "Login" && "tw-translate-x-[100vw] position-absolute"}`}>
                 <h1 className="fs-2 mb-5 fw-bold text-start">Login</h1>
-                <div className="mb-3">
+                <div className="mb-4">
                   <input required name="email" placeholder="Email" autoComplete="new-password" type="email" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <div className="mb-3">
+                <div className="mb-4">
                   <input required name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <button type="submit" className="roboto btn btn-success w-100 my-4 py-2 px-4 rounded tw-font-normal tw-text-white roboto tw-transition tw-duration-300">Masuk</button>
+                <button type="submit" className="tw-self-center w-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success my-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Masuk</button>
                 <a className="text-primary roboto" href="#">Lupa Password?</a>
               </form>
               </div>
@@ -241,7 +241,7 @@ const Auth = () => {
               )}
             </main>
           </div>
-        </MouseParallaxContainer>
+        </div>
       </div>
     </>
   )
