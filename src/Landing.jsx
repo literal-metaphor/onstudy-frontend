@@ -19,19 +19,14 @@ const Landing = () => {
   const fiturCard3Control = useAnimation();
 
   useEffect(() => {
-    if (heroIsInView) {
-      heroControl.start("visible");
-    }
-    if (fiturCard1IsInView) {
-      fiturCard1Control.start("visible");
-    }
-    if (fiturCard2IsInView) {
-      fiturCard2Control.start("visible");
-    }
-    if (fiturCard3IsInView) {
-      fiturCard3Control.start("visible");
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const controls = [heroControl, fiturCard1Control, fiturCard2Control, fiturCard3Control];
+    const isInView = [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView];
+
+    isInView.forEach((view, index) => {
+      if (view) {
+        controls[index].start("visible");
+      }
+    });
   }, [heroIsInView, fiturCard1IsInView, fiturCard2IsInView, fiturCard3IsInView]);
 
   useEffect(() => {
@@ -102,7 +97,7 @@ const Landing = () => {
                 </div>
               </motion.div>
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={1} factorY={0.5} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
+            <MouseParallaxChild factorX={0.2} factorY={0.2} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
               <motion.div variants={{hidden: {opacity: 0, x: 50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 1}}>
                 <img src="Landing/Hero.svg" alt="Hero Image" className="tw-w-[280px] tw-h-[280px] align-self-lg-end" />
               </motion.div>

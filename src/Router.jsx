@@ -10,9 +10,9 @@ const Router = () => {
       <Routing>
         <Guard/>
         <Routes>
-          <Route exact path="/" Component={Landing} />
-          <Route exact path="/app" Component={App} />
-          <Route exact path="/auth" Component={Auth} />
+          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/app" element={<App />} />
+          <Route exact path="/auth" element={<Auth />} />
         </Routes>
       </Routing>
     </>
