@@ -83,7 +83,7 @@ const Landing = () => {
         {/* Hero section */}
         <div className="tw-h-[1px] my-4"/>
         <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
-        <section ref={heroRef} id="hero" className="container">
+        <section ref={heroRef} id="hero" className="container py-2">
           <div className="row pe-lg-5">
             <MouseParallaxChild factorX={0.1} factorY={0.1} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-2 order-lg-2">
               <motion.div variants={{hidden: {opacity: 0, x: -50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 0.5}}>
@@ -114,31 +114,31 @@ const Landing = () => {
           <br/>
           <div className="row">
             <motion.div ref={fiturCard1Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard1Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 0.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
-              <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#FBCA6B] tw-to-[#fff]">
+              <div className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#FBCA6B] tw-to-[#fff]">
                 <img src="Landing/Fitur1.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[200px] tw-m-auto" alt="Ruang kelas virtual"/>
                 <div className="card-body">
                   <h5 className="fw-medium fs-5 card-title poppins fw-bold mb-3">Ruang Kelas Virtual</h5>
                   <p className="card-text opacity-50 tw-text-justify">Semua fitur yang kamu butuhin di <span className="fw-bold">ruang kelas</span>, mulai dari <span className="fw-bold">pematerian</span>, <span className="fw-bold">tugas</span>, dan <span className="fw-bold">kuis berwaktu</span>!</p>
                 </div>
-              </Tilt>
+              </div>
             </motion.div>
             <motion.div ref={fiturCard2Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard2Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 1}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
-              <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#B8C7FF] tw-to-[#fff]">
+              <div className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#B8C7FF] tw-to-[#fff]">
                 <img src="Landing/Fitur2.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[200px] tw-m-auto" alt="Forum guru dan siswa"/>
                 <div className="card-body">
                   <h5 className="fw-medium fs-5 card-title poppins fw-bold mb-3">Forum Guru dan Siswa</h5>
                   <p className="card-text opacity-50 tw-text-justify">Bingung ngerjain tugas yang <span className="fw-bold">susah</span>? Sekarang kamu bisa <span className="fw-bold">diskusi</span> bersama <span className="fw-bold">guru</span> dan <span className="fw-bold">teman</span> secara <span className="fw-bold">online</span>!</p>
                 </div>
-              </Tilt>
+              </div>
             </motion.div>
             <motion.div ref={fiturCard3Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard3Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 1.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
-              <Tilt className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#EBCC99] tw-to-[#fff]">
+              <div className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#EBCC99] tw-to-[#fff]">
                 <img src="Landing/Fitur3.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[189px] tw-m-auto" alt="Rapor virtual"/>
                 <div className="card-body">
                   <h5 className="fw-medium fs-5 card-title poppins fw-bold mb-3">Rapor Virtual</h5>
                   <p className="card-text opacity-50 tw-text-justify">Bangun <span className="fw-bold">integritas</span> pendidikanmu dengan melacak <span className="fw-bold">progress</span> pembelajaranmu di fitur rapor virtual <span className="fw-semibold tw-text-[#28A745]">onStudy</span>!</p>
                 </div>
-              </Tilt>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -289,9 +289,9 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-6 order-3 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center d-lg-block">
+          {/* <div className="col-12 col-lg-6 order-3 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center d-lg-block">
             <div className="tw-text-justify text-white">
-              <h4 className="fw-medium fs-4 text-white mb-4 poppins">Kelompok 4 MejaKita Academy 2024:</h4>
+              <h4 className="fw-medium fs-4 text-white mb-4 poppins">Kelompok 4 MejaKita Academy 2024</h4>
               <ul className="text-white">
                 <li className="mb-2">Neila Adenin Syafitri (UI/UX + Project Lead)</li>
                 <li className="mb-2">M. Edu Firman Rizqi Ramadhan (Frontend Developer)</li>
@@ -299,6 +299,9 @@ const Landing = () => {
                 <li className="mb-2">Drajad Kusuma Adi (Backend Developer)</li>
               </ul>
             </div>
+          </div> */}
+          <div className="roboto col-12 order-3 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center d-lg-block tw-text-white">
+             Kelompok 4 MejaKita Academy 2024<sup>&copy;</sup>
           </div>
         </div>
       </footer>
