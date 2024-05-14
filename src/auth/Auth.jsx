@@ -66,7 +66,6 @@ const Auth = () => {
       const result = await signInWithPopup(auth, provider);
       const email = result.user.email;
       const username = result.user.displayName;
-      console.log(username);
       const password = result.user.uid;
       if (!email || !username || !password) return;
       api.post(`/auth/oauth`, {
@@ -124,7 +123,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="container-fluid tw-bg-[#4F6F52] lg:tw-h-[100vh]">
+      <div className="container-fluid tw-bg-[#4F6F52]">
         {/* TOS modal */}
         <dialog id="tos_modal" className="tw-modal roboto">
           <div className="tw-modal-box p-0">

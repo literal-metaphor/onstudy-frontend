@@ -85,7 +85,7 @@ const Landing = () => {
         <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
         <section ref={heroRef} id="hero" className="container py-2">
           <div className="row pe-lg-5">
-            <MouseParallaxChild factorX={0.1} factorY={0.1} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-2 order-lg-2">
+            <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-2 order-lg-2">
               <motion.div variants={{hidden: {opacity: 0, x: -50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 0.5}}>
                 <h1 className="fw-medium fs-1 poppins px-4 px-lg-0 mb-4 text-center text-lg-start">Belajar jadi lebih seru dengan <span className="fw-semibold tw-text-[#28A745]">onStudy</span>!</h1>
                 <p className="mb-4 px-4 px-lg-0 tw-text-justify">
@@ -96,7 +96,7 @@ const Landing = () => {
                   <a href="#fitur" className="btn btn-lg fs-6 mx-2 mx-lg-0 btn-outline-success">Lihat lebih lanjut</a>
                 </div>
               </motion.div>
-            </MouseParallaxChild>
+            </div>
             <MouseParallaxChild factorX={0.2} factorY={0.2} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
               <motion.div variants={{hidden: {opacity: 0, x: 50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 1}}>
                 <img src="Landing/Hero.svg" alt="Hero Image" className="tw-w-[280px] tw-h-[280px] align-self-lg-end" />
