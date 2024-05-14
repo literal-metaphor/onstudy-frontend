@@ -124,7 +124,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="container-fluid tw-bg-[#4F6F52]">
+      <div className="container-fluid tw-bg-[#4F6F52] vh-100">
         {/* TOS modal */}
         <dialog id="tos_modal" className="tw-modal roboto">
           <div className="tw-modal-box p-0">

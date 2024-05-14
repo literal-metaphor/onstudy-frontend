@@ -3,7 +3,7 @@ const App = () => {
     <>
       <section className="container-fluid">
         <div className="row">
-          <div className="sidebar col-1">
+          <div className="sidebar tw-bg-[#FCFBF9] col-1">
             <nav className="vh-100 d-flex flex-column position-fixed start-0 navbar">
               <a href="#" className="navbar-brand mx-auto mt-4 pt-1 mb-auto">
                 <img
@@ -98,14 +98,14 @@ const App = () => {
             <h1 className="fw-medium fs-2 poppins">Tugas</h1>
             <div className="dropdown my-4 ">
               <button
-                className="btn tw-h-[45px] w-75 tw-bg-[#EBEBEB] hover:tw-outline-[#0F0F0F] dropdown-toggle"
+                className="btn tw-h-[45px] tw-w-[90%] tw-bg-[#EBEBEB] hover:tw-outline-[#0F0F0F] dropdown-toggle"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                Kelas
               </button>
-              <ul className="dropdown-menu w-75">
+              <ul className="dropdown-menu tw-w-[90%]">
                 <li>
                   <a className="dropdown-item" href="#">
                     Action
@@ -123,7 +123,9 @@ const App = () => {
                 </li>
               </ul>
             </div>
-            .tw-bg-[#EBEBEB]
+            <div className="tw-bg-[#EBEBEB]">
+
+            </div>
           </div>
         </div>
       </section>
