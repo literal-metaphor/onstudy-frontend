@@ -15,11 +15,11 @@ const App = () => {
                   <div className="input-group p-0 border tw-rounded-lg w-50">
                     <input
                       type="text"
-                      class="form-control tw-bg-[#fff] tw-border-0"
+                      className="form-control tw-bg-[#fff] tw-border-0"
                       placeholder="Cari kelas"
                     />
                     <span
-                      class="input-group-text tw-bg-[#fff] tw-border-0"
+                      className="input-group-text tw-bg-[#fff] tw-border-0"
                       id="basic-addon2"
                     >
                       <img
