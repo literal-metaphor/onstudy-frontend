@@ -1,6 +1,6 @@
 import { MouseParallaxChild, MouseParallaxContainer } from "react-parallax-mouse"
 import { Tilt } from "react-tilt"
-import {motion, useAnimation, useInView, } from "framer-motion"
+import { motion, useAnimation, useInView, } from "framer-motion"
 import { useEffect, useRef } from "react"
 
 const Landing = () => {
@@ -85,7 +85,7 @@ const Landing = () => {
         <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
         <section ref={heroRef} id="hero" className="container py-2">
           <div className="row pe-lg-5">
-            <MouseParallaxChild factorX={0.1} factorY={0.1} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-2 order-lg-2">
+            <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-2 order-lg-2">
               <motion.div variants={{hidden: {opacity: 0, x: -50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 0.5}}>
                 <h1 className="fw-medium fs-1 poppins px-4 px-lg-0 mb-4 text-center text-lg-start">Belajar jadi lebih seru dengan <span className="fw-semibold tw-text-[#28A745]">onStudy</span>!</h1>
                 <p className="mb-4 px-4 px-lg-0 tw-text-justify">
@@ -96,7 +96,7 @@ const Landing = () => {
                   <a href="#fitur" className="btn btn-lg fs-6 mx-2 mx-lg-0 btn-outline-success">Lihat lebih lanjut</a>
                 </div>
               </motion.div>
-            </MouseParallaxChild>
+            </div>
             <MouseParallaxChild factorX={0.2} factorY={0.2} className="col-lg-6 d-flex flex-column justify-content-center align-items-center order-1 order-lg-2 mb-4 mb-lg-0">
               <motion.div variants={{hidden: {opacity: 0, x: 50}, visible: {opacity: 1, x: 0}}}initial="hidden" animate={heroControl} transition={{duration: 0.5, delay: 1}}>
                 <img src="Landing/Hero.svg" alt="Hero Image" className="tw-w-[280px] tw-h-[280px] align-self-lg-end" />
@@ -133,7 +133,7 @@ const Landing = () => {
             </motion.div>
             <motion.div ref={fiturCard3Ref} variants={{hidden: {opacity: 0, scale: 0}, visible: {opacity: 1, scale: 1}}}initial="hidden" animate={fiturCard3Control} transition={{duration: 0.5, delay: window.innerWidth < 768 ? 0.5 : 1.5}} className="col-12 col-lg-4 d-flex justify-content-center align-content-center">
               <div className="card me-lg-4 mb-lg-0 mb-4 mx-4 mx-lg-0 tw-h-fit tw-w-[30rem] tw-bg-gradient-to-b tw-from-[#EBCC99] tw-to-[#fff]">
-                <img src="Landing/Fitur3.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[189px] tw-m-auto" alt="Rapor virtual"/>
+                <img src="Landing/Fitur3.svg" className="card-img-top p-4 tw-w-[200px] tw-h-[200px] tw-m-auto" alt="Rapor virtual"/>
                 <div className="card-body">
                   <h5 className="fw-medium fs-5 card-title poppins fw-bold mb-3">Rapor Virtual</h5>
                   <p className="card-text opacity-50 tw-text-justify">Bangun <span className="fw-bold">integritas</span> pendidikanmu dengan melacak <span className="fw-bold">progress</span> pembelajaranmu di fitur rapor virtual <span className="fw-semibold tw-text-[#28A745]">onStudy</span>!</p>
@@ -257,7 +257,7 @@ const Landing = () => {
               <div className="d-flex flex-column justify-content-center align-items-center align-items-lg-start">
                 <div className="mb-4 d-flex justify-content-center align-items-center">
                   <img src="Landing/Logo.png" alt="Logo" className="rounded-circle me-4 tw-w-[40px] tw-h-[40px]"/>
-                  <a className="text-white text-decoration-none" href="#"><h2 className="fw-medium fs-2 fw-bold">onStudy</h2></a>
+                  <a className="text-white text-decoration-none" href=""><h2 className="fw-medium fs-2 fw-bold">onStudy</h2></a>
                 </div>
                 <div className="mb-5 d-flex justify-content-start align-items-center">
                   <a className="m-4 m-lg-0 me-lg-4 tw-w-[24px] tw-h-[24px]" href="#"><img src="Landing/IG.svg" alt="Instagram"/></a>
@@ -301,7 +301,8 @@ const Landing = () => {
             </div>
           </div> */}
           <div className="roboto col-12 order-3 mb-4 mb-lg-0 d-flex flex-column justify-content-center align-items-center d-lg-block tw-text-white">
-             &copy; 2024 Kelompok 4 MejaKita Academy
+
+            &copy; 2024 Kelompok 4 MejaKita Academy
           </div>
         </div>
       </footer>

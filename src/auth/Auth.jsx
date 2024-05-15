@@ -19,13 +19,14 @@ const Auth = () => {
     if (!agreed) return;
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
-    const username = formData.get("username").replace(/\W/g, '');
+    const username = formData.get("username");
     const password = formData.get("password");
     if (!email || !username || !password) return;
     api.post("/auth/register", {
       email,
       username,
-      password
+      password,
+      "method": "Email"
     })
     .then((res) => {
       localStorage.setItem("userId", res.data.user.id);
@@ -34,7 +35,7 @@ const Auth = () => {
     })
     .catch((err) => {
       console.error(err);
-      setAuthError(err.response.data.message || err.response.data[0].message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
+      setAuthError(err.response.data.message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
     })
   }
   function HandleLogin(e) {
@@ -45,7 +46,8 @@ const Auth = () => {
     if (!email || !password) return;
     api.post("/auth/login", {
       email,
-      password
+      password,
+      "method": "Email"
     })
     .then((res) => {
       localStorage.setItem("userId", res.data.user.id);
@@ -53,7 +55,7 @@ const Auth = () => {
       window.location.pathname = "/app";
     })
     .catch((err) => {
-      setAuthError(err.response.data.message || err.response.data[0].message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
+      setAuthError(err.response.data.message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
     })
   }
   async function GoogleAuth() {
@@ -63,14 +65,14 @@ const Auth = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const email = result.user.email;
-      const username = result.user.displayName.replace(/\W/g, '');
-      console.log(username);
+      const username = result.user.displayName;
       const password = result.user.uid;
       if (!email || !username || !password) return;
-      api.post(`/auth/${page === "SignUp" ? "register" : "login"}`, {
+      api.post(`/auth/oauth`, {
         email,
         username,
-        password
+        password,
+        "method": "Google"
       })
       .then((res) => {
         localStorage.setItem("userId", res.data.user.id);
@@ -78,7 +80,7 @@ const Auth = () => {
         window.location.pathname = "/app";
       })
       .catch((err) => {
-        setAuthError(err.response.data.message || err.response.data[0].message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
+        setAuthError(err.response.data.message || "Tidak diketahui, mohon coba lagi menggunakan metode lain");
       })
     } catch (err) {
       setAuthError("Tidak diketahui, mohon coba lagi menggunakan metode lain");
@@ -97,7 +99,7 @@ const Auth = () => {
     // try {
     //   const result = await signInWithPopup(auth, provider);
     //   const email = result.user.email;
-    //   const username = result.user.displayName.replace(/\W/g, '');
+    //   const username = result.user.displayName;
     //   const password = result.user.uid;
     //   if (!email || !username || !password) throw new Error();
     //   api.post(`/auth/${page === "SignUp" ? "register" : "login"}`, {
@@ -121,7 +123,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="container-fluid py-5 py-lg-0 lg:tw-h-screen tw-bg-[#4F6F52]">
+      <div className="container-fluid tw-bg-[#4F6F52]">
         {/* TOS modal */}
         <dialog id="tos_modal" className="tw-modal roboto">
           <div className="tw-modal-box p-0">
@@ -173,9 +175,9 @@ const Auth = () => {
           </div>
         </dialog>
         <div className="tw-h-full">
-          <div className="row gx-4 tw-h-full">
+          <div className="row gx-4 tw-h-full d-flex align-items-center">
             {/* Aside content */}
-            <aside className="tw-h-full col-12 p-5 my-5 my-lg-0 col-lg-5 d-flex flex-column justify-content-center align-items-center">
+            <aside className="tw-h-full d-none d-lg-block col-12 p-5 my-5 my-lg-0 col-lg-5 d-flex flex-column justify-content-center align-items-center">
               <div className="p-4">
                 <div className="roboto">
                   <h1 className="fs-1 fw-bold px-2">
@@ -190,7 +192,7 @@ const Auth = () => {
               </div>
             </aside>
             {/* Main form */}
-            <main className="tw-h-full col-12 col-lg-7 p-5 d-flex flex-column justify-content-center align-items-center lg:tw-rounded-l-3xl tw-bg-[#fff]">
+            <main className="tw-h-full col-12 col-lg-7 p-lg-5 py-5 d-flex flex-column justify-content-center align-items-center lg:tw-rounded-l-3xl tw-bg-[#fff]">
               <div className="position-relative w-100 h-100 d-flex justify-content-center align-items-center">
               {/* Sign Up */}
               <form onSubmit={HandleSignIn} className={`d-flex flex-column justify-content-center w-100 px-4 tw-transition tw-duration-300 ${page !== "SignUp" && "tw-translate-x-[100vw] position-absolute"}`}>
@@ -208,7 +210,7 @@ const Auth = () => {
                   <input required readOnly onClick={()=>setAgreed(!agreed)} autoComplete="new-password" type="checkbox" className="form-check-input hover:tw-cursor-pointer" checked={agreed}/>
                   <label className="form-check-label hover:tw-cursor-pointer roboto"><span onClick={()=>setAgreed(!agreed)}>Saya menyutujui</span> <span className="text-primary" onClick={()=>document.getElementById('tos_modal').showModal()}>Persyaratan Layanan onStudy</span></label>
                 </div>
-                <button disabled={!agreed} type="submit" className="tw-self-center w-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success mt-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Daftar</button>
+                <button disabled={!agreed} type="submit" className="tw-self-center w-100 w-lg-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success mt-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Daftar</button>
               </form>
               {/* Login */}
               <form onSubmit={HandleLogin} className={`d-flex flex-column justify-content-center w-100 px-4 text-center tw-transition tw-duration-300 ${page !== "Login" && "tw-translate-x-[100vw] position-absolute"}`}>
@@ -219,7 +221,7 @@ const Auth = () => {
                 <div className="mb-4">
                   <input required name="password" placeholder="Password" autoComplete="new-password" type="password" className="form-control tw-bg-[#F5EFE6]"/>
                 </div>
-                <button type="submit" className="tw-self-center w-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success my-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Masuk</button>
+                <button type="submit" className="tw-self-center w-100 w-lg-75 roboto tw-shadow-md tw-shadow-slate-600 btn btn-success my-4 py-2 px-4 rounded tw-font-normal tw-text-white tw-transition tw-duration-300">Masuk</button>
                 <a className="text-primary roboto" href="#">Lupa Password?</a>
               </form>
               </div>
@@ -227,9 +229,9 @@ const Auth = () => {
               <div className="tw-divider py-4 roboto">Atau</div>
               {/* Third-Party */}
               <div className="d-flex justify-content-center align-items-center flex-wrap">
-                <button onClick={GoogleAuth} disabled={!agreed && page !== "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
-                <button onClick={FacebookAuth} disabled={!agreed && page !== "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
-                <button onClick={TwitterAuth} disabled={!agreed && page !== "Login"} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
+                <button onClick={GoogleAuth} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Google.svg" alt="Google logo" width={36} height={36} /></button>
+                <button onClick={FacebookAuth} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/Facebook.svg" alt="Facebook logo" width={36} height={36} /></button>
+                <button onClick={TwitterAuth} className="tw-btn tw-btn-ghost mx-4 my-2"><img className="rounded-circle" src="Auth/X.svg" alt="X logo" width={36} height={36} /></button>
               </div>
               <br />
               {/* Change Page */}
