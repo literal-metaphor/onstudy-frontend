@@ -12,6 +12,7 @@ const Router = () => {
         <Routes>
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/app" element={<App />} />
+          <Route exact path="/devapp" element={<App />} />
           <Route exact path="/auth" element={<Auth />} />
         </Routes>
       </Routing>
