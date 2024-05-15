@@ -1,6 +1,6 @@
 const ClassCard = () => {
   return (
-    <div className="tw-card tw-card-side col-lg-5 col-11 m-2 tw-bg-[#DCF3ED] text-primary-content">
+    <div className="tw-card tw-card-side col-lg-6 col-12 tw-bg-[#DCF3ED] tw-w-[45%] text-primary-content">
       <div className="tw-card-body d-flex flex-column justify-content-between">
         <div>
           <div className="tw-text-sm tw-text-regular tw-card-title fs-1">IPA</div>
