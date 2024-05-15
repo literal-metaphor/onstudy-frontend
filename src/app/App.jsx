@@ -12,7 +12,7 @@ const App = () => {
               <div className="col-7 offset-1 container mt-5">
                 <h1 className="row fw-medium fs-1 poppins">Hai, User</h1>
                 <form className="row mt-3">
-                  <div class="input-group p-0 border tw-rounded-lg w-50">
+                  <div className="input-group p-0 border tw-rounded-lg w-50">
                     <input
                       type="text"
                       class="form-control tw-bg-[#fff] tw-border-0"
