@@ -6,57 +6,61 @@ const Navbar = ({ children }) => {
           <input id="sidebar" type="checkbox" className="tw-drawer-toggle" />
           <div className="tw-drawer-content flex flex-col container-fluid">
             {/* Page content here */}
-            {children}
+            <div className="ms-5">
+              {children}
+            </div>
           </div>
           <div className="tw-drawer-side">
-            <label htmlFor="sidebar" aria-label="close sidebar" className="tw-drawer-overlay"></label> 
-            <ul className="tw-menu tw-p-4 tw-text-base-content position-fixed tw-h-screen tw-start-0 tw-top-0">
+            <label htmlFor="sidebar" aria-label="close sidebar" className="tw-drawer-overlay"></label>
+            <ul className="tw-menu tw-bg-[#fff] tw-p-4 tw-text-base-content position-fixed tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen overflow-y-scroll">
               {/* Sidebar content here */}
               <li className="my-4">
                 <a className="tw-btn tw-btn-ghost" href="">
                   <img src="Logo.png" width="48px" height="48px" alt="logo" />
                 </a>
               </li>
-              <li className="mt-auto mb-4">
-                <a className="tw-btn tw-btn-ghost" href="#">
-                  <img
-                    src="Dashboard/house.svg"
-                    alt="Home"
-                    height="24px"
-                    width="24px"
-                  />
-                </a>
-              </li>
-              <li className="my-4">
-                <a className="tw-btn tw-btn-ghost" href="#">
-                  <img
-                    src="Dashboard/tugas.svg"
-                    alt="Assignments"
-                    height="24px"
-                    width="24px"
-                  />
-                </a>
-              </li>
-              <li className="my-4">
-                <a className="tw-btn tw-btn-ghost" href="#">
-                  <img
-                    src="Dashboard/kelas.svg"
-                    alt="Classes"
-                    height="24px"
-                    width="24px"
-                  />
-                </a>
-              </li>
-              <li className="my-4">
-                <a className="tw-btn tw-btn-ghost" href="#">
-                  <img
-                    src="Dashboard/person.svg"
-                    alt="Profile"
-                    height="24px"
-                    width="24px"
-                  />
-                </a>
-              </li>
+              <div className="my-5">
+                <li className="mt-auto mb-4">
+                  <a className="tw-btn tw-btn-ghost" href="#">
+                    <img
+                      src="Dashboard/house.svg"
+                      alt="Home"
+                      height="24px"
+                      width="24px"
+                    />
+                  </a>
+                </li>
+                <li className="my-4">
+                  <a className="tw-btn tw-btn-ghost" href="#">
+                    <img
+                      src="Dashboard/tugas.svg"
+                      alt="Assignments"
+                      height="24px"
+                      width="24px"
+                    />
+                  </a>
+                </li>
+                <li className="my-4">
+                  <a className="tw-btn tw-btn-ghost" href="#">
+                    <img
+                      src="Dashboard/kelas.svg"
+                      alt="Classes"
+                      height="24px"
+                      width="24px"
+                    />
+                  </a>
+                </li>
+                <li className="my-4">
+                  <a className="tw-btn tw-btn-ghost" href="#">
+                    <img
+                      src="Dashboard/person.svg"
+                      alt="Profile"
+                      height="24px"
+                      width="24px"
+                    />
+                  </a>
+                </li>
+              </div>
               <li className="mt-auto" onClick={
                 () => {
                   localStorage.clear();
