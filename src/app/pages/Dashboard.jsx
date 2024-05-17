@@ -4,7 +4,7 @@ import TaskCard from "../components/TaskCard";
 const Dashboard = () => {
   return (
     <div className="row">
-        <div className="col-7 offset-lg-1 container mt-5 lg:tw-h-screen">
+        <div className="col-8 container mt-5 ms-5 lg:tw-h-screen">
           <div className="d-flex flex-column justify-content-start align-items-start">
             <div className="row">
               <div className="d-flex align-items-center p-0">
@@ -50,7 +50,7 @@ const Dashboard = () => {
             <ClassCard />
           </div>
         </div>
-        <div className="col-4 mt-5 d-flex flex-column">
+        <div className="col-3 mt-5 d-flex flex-column">
             <h1 className="fw-medium fs-2 poppins">Tugas</h1>
             <div className="dropdown my-4 ">
               <button

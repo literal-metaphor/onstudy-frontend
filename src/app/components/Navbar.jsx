@@ -6,13 +6,11 @@ const Navbar = ({ children }) => {
           <input id="sidebar" type="checkbox" className="tw-drawer-toggle" />
           <div className="tw-drawer-content flex flex-col container-fluid">
             {/* Page content here */}
-            <div className="ms-5">
-              {children}
-            </div>
+            {children}
           </div>
           <div className="tw-drawer-side">
             <label htmlFor="sidebar" aria-label="close sidebar" className="tw-drawer-overlay"></label>
-            <ul className="tw-menu tw-bg-[#fff] tw-p-4 tw-text-base-content position-fixed tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen overflow-y-scroll">
+            <ul className="tw-menu tw-p-4 tw-bg-[#FCFBF9] tw-text-base-content tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen">
               {/* Sidebar content here */}
               <li className="my-4">
                 <a className="tw-btn tw-btn-ghost" href="">
@@ -21,14 +19,14 @@ const Navbar = ({ children }) => {
               </li>
               <div className="my-5">
                 <li className="mt-auto mb-4">
-                  <a className="tw-btn tw-btn-ghost" href="#">
+                  <button className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=dashboard'}>
                     <img
                       src="Dashboard/house.svg"
                       alt="Home"
                       height="24px"
                       width="24px"
                     />
-                  </a>
+                  </button>
                 </li>
                 <li className="my-4">
                   <a className="tw-btn tw-btn-ghost" href="#">
