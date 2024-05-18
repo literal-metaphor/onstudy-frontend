@@ -8,9 +8,9 @@ const Navbar = ({ children }) => {
             {/* Page content here */}
             {children}
           </div>
-          <div className="tw-drawer-side">
+          <div className="tw-drawer-side overflow-hidden">
             <label htmlFor="sidebar" aria-label="close sidebar" className="tw-drawer-overlay"></label>
-            <ul className="tw-menu p-0 tw-bg-[#FCFBF9] tw-text-base-content tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen">
+            <ul className="tw-menu  p-0 tw-bg-[#FCFBF9] tw-text-base-content tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen">
               {/* Sidebar content here */}
               <li className="my-4">
                 <a className="tw-btn tw-btn-ghost" href="">
@@ -29,7 +29,7 @@ const Navbar = ({ children }) => {
                   </button>
                 </li>
                 <li className="my-4">
-                  <a className="tw-btn tw-btn-ghost" href="#">
+                  <a className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=userprofile&userroute=assignments'}>
                     <img
                       src="Dashboard/tugas.svg"
                       alt="Assignments"
@@ -39,7 +39,7 @@ const Navbar = ({ children }) => {
                   </a>
                 </li>
                 <li className="my-4">
-                  <a className="tw-btn tw-btn-ghost" href="#">
+                  <a className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=userprofile&userroute=classroom'}>
                     <img
                       src="Dashboard/kelas.svg"
                       alt="Classes"
@@ -49,7 +49,7 @@ const Navbar = ({ children }) => {
                   </a>
                 </li>
                 <li className="my-4">
-                  <a className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=userprofile'}>
+                  <a className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=userprofile&userroute=dashboard'}>
                     <img
                       src="Dashboard/person.svg"
                       alt="Profile"

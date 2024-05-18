@@ -18,23 +18,23 @@ const UserProfile = () => {
   const ProfileClassCard = () => {
     return (
       <>
-        <div
-          className="tw-card rounded rounded-5 tw-w-96 tw-h-[42%] g-5 mx-3 p-0 tw-card-side col-lg-6 col-12 tw-bg-[#DCF3ED] text-primary-content"
-        >
+        <div className="tw-card rounded rounded-5 tw-w-96 tw-h-[42%] g-5 mx-3 p-0 tw-card-side col-lg-6 col-12 tw-bg-[#DCF3ED] text-primary-content">
           <div className="tw-card-body roboto d-flex flex-column justify-content-between">
             <div>
               <div className="tw-text-sm tw-text-regular poppins tw-card-title fs-1">
                 IPA
               </div>
-              <div className="tw-text-sm tw-text-regular roboto mt-3">32 Murid</div>
+              <div className="tw-text-sm tw-text-regular roboto mt-3">
+                32 Murid
+              </div>
               <p className="tw-mt-[3rem]">Jumlah Murid : 23</p>
               <p>Jumlah Tugas : 23</p>
             </div>
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
   const ProfileAssignmentList = () => {
     return (
       <>
@@ -42,22 +42,34 @@ const UserProfile = () => {
           <p className="fs-4 fw-semibold">Nama Tugas</p>
           <div className="d-flex align-items-center">
             <div className="d-flex align-items-center mx-3">
-              <img src="Userprofile/akun.svg" alt="completees" className="me-2 tw-w-[24px] tw-h-[24px]" />
+              <img
+                src="Userprofile/akun.svg"
+                alt="completees"
+                className="me-2 tw-w-[24px] tw-h-[24px]"
+              />
               <p className="fs-5 fw-medium">23/32</p>
             </div>
             <div className="d-flex align-items-center mx-3">
-              <img src="Userprofile/kelas.svg" alt="classroom" className="me-2 tw-w-[24px] tw-h-[24px]" />
+              <img
+                src="Userprofile/kelas.svg"
+                alt="classroom"
+                className="me-2 tw-w-[24px] tw-h-[24px]"
+              />
               <p className="fs-5 fw-medium">Kelas</p>
             </div>
             <div className="d-flex align-items-center mx-3">
-              <img src="Userprofile/clock.svg" alt="turning date" className="me-2 tw-w-[24px] tw-h-[24px]" />
+              <img
+                src="Userprofile/clock.svg"
+                alt="turning date"
+                className="me-2 tw-w-[24px] tw-h-[24px]"
+              />
               <p className="fs-5 fw-medium">DD/MM/YY</p>
             </div>
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <div className="row">
@@ -148,13 +160,13 @@ const UserProfile = () => {
                 <h1 className="fw-bold fs-3">Tugas</h1>
                 <br className="my-4" />
                 <div className="w-100 container d-flex flex-column align-items-center tw-overflow-y-scroll pb-5">
-                <div className="row">
-                  <ProfileAssignmentList />
-                  <ProfileAssignmentList />
-                  <ProfileAssignmentList />
-                  <ProfileAssignmentList />
+                  <div className="row">
+                    <ProfileAssignmentList />
+                    <ProfileAssignmentList />
+                    <ProfileAssignmentList />
+                    <ProfileAssignmentList />
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           )}
@@ -169,7 +181,7 @@ const UserProfile = () => {
             {/* Sidebar content here */}
             <div className="d-flex flex-column justify-content-center align-items-center">
               <br className="my-4" />
-              <h1 className="fs-1 fw-bold">
+              <h1 className="fs-1 poppins fw-bold">
                 Profil <br /> Pengguna
               </h1>
             </div>

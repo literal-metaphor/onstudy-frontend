@@ -35,7 +35,7 @@ const Dashboard = () => {
               </div>
             </form>
           </div>
-          <div className="row gap-4 d-flex poppins mt-5 tw-h-[50vh] tw-overflow-x-hidden overflow-y-scroll">
+          <div className="row gap-4 d-flex poppins mt-5 tw-h-[60vh] tw-overflow-x-hidden overflow-y-scroll">
             <ClassCard />
             <ClassCard />
             <ClassCard />
@@ -81,7 +81,7 @@ const Dashboard = () => {
             </div>
             {/* List Tugas */}
             <br className="mt-2"/>
-            <div className="tw-h-[50vh] tw-overflow-y-scroll">
+            <div className="tw-h-[60vh] tw-overflow-y-scroll">
               <TaskNotification/>
               <TaskNotification/>
               <TaskNotification/>
