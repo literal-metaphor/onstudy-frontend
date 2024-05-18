@@ -8,7 +8,6 @@ import { api } from "./utils/API";
 
 const Router = () => {
   const [auth, setAuth] = useState(null);
-  const [authDone, setAuthDone] = useState(false);
 
   const clearAuthData = () => {
     localStorage.removeItem('userId');
@@ -52,29 +51,23 @@ const Router = () => {
       window.location.pathname= '/app';
     } else if (!publicRoutes.includes(path) && path !== "/app") {
       window.location.pathname = '/app';
-    } else {
-      document.getElementById("root").classList.remove("d-none");
     }
-
-    setAuthDone(true);
 
    }, [auth]);
 
-   if (authDone) {
-    return (
-      <>
-        <Routing>
-          {/* <Guard/> */}
-          <Routes>
-            <Route exact path="/" element={<Landing />} />
-            <Route exact path="/app" element={<App />} />
-            <Route exact path="/auth" element={<Auth />} />
-            <Route exact path="/devapp" element={<App />} />
-          </Routes>
-        </Routing>
-      </>
-    )
-   }
+   return (
+    <>
+      <Routing>
+        {/* <Guard/> */}
+        <Routes>
+          <Route exact path="/" element={<Landing />} />
+          <Route exact path="/app" element={<App />} />
+          <Route exact path="/auth" element={<Auth />} />
+          <Route exact path="/devapp" element={<App />} />
+        </Routes>
+      </Routing>
+    </>
+  )
 }
 
 export default Router
