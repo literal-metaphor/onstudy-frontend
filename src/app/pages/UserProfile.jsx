@@ -57,8 +57,8 @@ const UserProfile = () => {
                   </div>
                 </div>
               </div>
-              <br className="my-4" /><br className="my-4" />
-              <button className="ms-2 btn btn-success py-2 px-4" onClick={() => {localStorage.clear();location.reload();}}>
+              <br className="my" />
+              <button className="ms-2  btn btn-success py-2 px-4" onClick={() => {localStorage.clear();location.reload();}}>
                 Logout
               </button>
             </div>
@@ -103,7 +103,8 @@ const UserProfile = () => {
                 />
                 Tugas
               </a>
-              <button onClick={() => window.location.search = '?route=dashboard'} className="w-100 my-4 btn btn-success py-2 px-4 d-flex align-items-center">
+              <br className="my-4"/><br className="my-4"/>
+              <button onClick={() => window.location.search = '?route=dashboard'} className="w-100 mt-auto my-4 btn btn-success py-2 px-4 d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="me-2 bi bi-arrow-left" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                 </svg>
