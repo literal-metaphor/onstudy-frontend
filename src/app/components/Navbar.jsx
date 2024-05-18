@@ -10,14 +10,14 @@ const Navbar = ({ children }) => {
           </div>
           <div className="tw-drawer-side">
             <label htmlFor="sidebar" aria-label="close sidebar" className="tw-drawer-overlay"></label>
-            <ul className="tw-menu tw-p-4 tw-bg-[#FCFBF9] tw-text-base-content tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen">
+            <ul className="tw-menu p-0 tw-bg-[#FCFBF9] tw-text-base-content tw-my-auto flex-nowrap tw-start-0 tw-top-0 tw-h-screen">
               {/* Sidebar content here */}
               <li className="my-4">
                 <a className="tw-btn tw-btn-ghost" href="">
-                  <img src="Logo.png" width="48px" height="48px" alt="logo" />
+                  <img src="Logo.png" width="48px" height="56px" alt="logo" />
                 </a>
               </li>
-              <div className="my-5">
+              <div className="mt-auto">
                 <li className="mt-auto mb-4">
                   <button className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=dashboard'}>
                     <img
@@ -49,7 +49,7 @@ const Navbar = ({ children }) => {
                   </a>
                 </li>
                 <li className="my-4">
-                  <a className="tw-btn tw-btn-ghost" href="#">
+                  <a className="tw-btn tw-btn-ghost" onClick={() => window.location.search = '?route=userprofile'}>
                     <img
                       src="Dashboard/person.svg"
                       alt="Profile"
@@ -59,11 +59,7 @@ const Navbar = ({ children }) => {
                   </a>
                 </li>
               </div>
-              <li className="mt-auto" onClick={
-                () => {
-                  localStorage.clear();
-                  location.reload();
-                }
+              <li className="mt-lg-auto mt-5 mb-3" onClick={() => {localStorage.clear();location.reload();}
               }>
                 <a className="tw-btn tw-btn-ghost mt-auto mb-5" href="#">
                   <img
