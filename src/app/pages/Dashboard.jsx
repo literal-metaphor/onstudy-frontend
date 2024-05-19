@@ -5,6 +5,7 @@ import { api } from "../../utils/API";
 
 const Dashboard = () => {
   const [classrooms, setClassrooms] = useState([]);
+  const [username, setUsername] = useState("");
 
   async function getAllJoinedClassrooms() {
     try {
@@ -32,15 +33,17 @@ const Dashboard = () => {
             const teacherRes = await api.get('/users/' + val.user_id);
             const teacherData = teacherRes.data.data;
             classroomMap.get(val.class_id).teacherName = teacherData.username;
-          } else if (val.role === 'Student') {
-            const studentRes = await api.get('/users/' + val.user_id);
-            const studentData = studentRes.data.data;
-            classroomMap.get(val.class_id).students.push(studentData.username);
           }
+          // else if (val.role === 'Student') {
+          //   const studentRes = await api.get('/users/' + val.user_id);
+          //   const studentData = studentRes.data.data;
+          //   classroomMap.get(val.class_id).students.push(studentData.username);
+          // }
         }
       }
 
       // Convert classroomMap values to an array
+      // eslint-disable-next-line no-unused-vars
       for (const [key, value] of classroomMap.entries()) {
         classrooms.push(value);
       }
@@ -51,10 +54,20 @@ const Dashboard = () => {
     }
   }
 
+  async function getUsername() {
+  try {
+      const res = await api.get('/users/' + localStorage.getItem('userId'));
+      const userData = res.data.data;
+      setUsername(userData.username);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
+    getUsername();
     getAllJoinedClassrooms();
-    console.log(classrooms);
-  }, []); // Dependency array should not include classrooms to avoid infinite loop
+  }, []);
 
   function handleCreateClassroom(e)
   {
@@ -177,7 +190,7 @@ const Dashboard = () => {
                 <label htmlFor="sidebar" className="tw-btn tw-btn-ghost tw-drawer-button lg:tw-hidden">
                   <svg className="tw-w-[24px] tw-h-[24px] tw-b-transparent lg-tw-hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 6H20M4 12H20M4 18H20" stroke="#4F6F52" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </label>
-                <p className="fw-medium fs-1">Hai, User</p>
+                <p className="fw-medium fs-1">Hai, {username}</p>
               </div>
             </div>
             <div className="d-flex justify-content-between align-items-center mt-3 col-12">
@@ -224,18 +237,11 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row gap-4 d-flex poppins mt-5 tw-h-[60vh] tw-overflow-x-hidden overflow-y-scroll">
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
-            <ClassCard />
+            {classrooms.map((val) => {
+              return (
+                <ClassCard key={val.id} id={val.id} title={val.title} teacher={val.teacherName} subject={val.subject} />
+              )
+            })}
           </div>
         </div>
         <div className="col-3 mt-5 d-flex flex-column position-fixed end-0 me-1">
