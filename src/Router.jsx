@@ -42,7 +42,7 @@ const Router = () => {
   useEffect(() => {
     if (auth === null) return;
 
-    const publicRoutes = ['/', '/auth', '/devapp'];
+    const publicRoutes = ['/', '/auth'];
     const path = window.location.pathname;
 
     if (auth === false && !publicRoutes.includes(path)) {
@@ -63,7 +63,6 @@ const Router = () => {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/app" element={<App />} />
           <Route exact path="/auth" element={<Auth />} />
-          <Route exact path="/devapp" element={<App />} />
         </Routes>
       </Routing>
     </>

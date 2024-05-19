@@ -24,7 +24,7 @@ const ClassRoom = () => {
             <div className="d-flex align-self-end p-3">
               <img src="Classroom/assignments.svg" alt="Filter assignments" className="tw-w-[52px] pb-1  tw-h-[52px] mx-4" />
               <img src="Classroom/materials.svg" alt="Filter assignments" className="tw-w-[36px] tw-h-[52px] mx-4" />
-              {/* Button buat buka inpu task */}
+              {/* Button buat buka input task */}
               <img src="Classroom/add.svg" alt="Add Materials" onClick={()=>document.getElementById('taskinput').showModal()} className="tw-w-[36px] tw-h-[52px] mx-4 hover:tw-scale-[115%] tw-transition tw-duration-300 hover:tw-cursor-pointer" />
               <TaskInput/>
             </div>
