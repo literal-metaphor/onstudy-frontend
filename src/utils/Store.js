@@ -1,0 +1,1 @@
+export const store = "http://localhost:8000/storage/uploads/"

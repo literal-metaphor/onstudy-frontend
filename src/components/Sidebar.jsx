@@ -1,3 +1,30 @@
+/* eslint-disable react/prop-types */
+function MenuItem({ onClick, src, alt, text}) {
+  return (
+    <li onClick={onClick} className="tw-btn tw-btn-ghost my-1 tw-w-full d-flex justify-content-start tw-transition tw-duration-300 tw-rounded-lg">
+      <img src={src} alt={alt} className="tw-w-[24px] tw-h-[24px] me-1" />
+      <div className="tw-font-semibold tw-text-sm">{text}</div>
+    </li>
+  )
+}
+
+const menuItems = [
+  { page: 'dashboard', src: 'Beranda.svg', alt: 'Beranda', text: 'Beranda' },
+  { page: 'assignments', src: 'Tugas.svg', alt: 'Tugas', text: 'Tugas' },
+  { page: 'classrooms', src: 'Kelas.svg', alt: 'Kelas', text: 'Kelas' },
+];
+
+function handleMenuClick(page) {
+  sessionStorage.setItem('page', page);
+  location.reload();
+}
+
+function handleLogout() {
+  localStorage.clear();
+  sessionStorage.clear();
+  location.reload();
+}
+
 export default function Sidebar() {
   return (
     <>
@@ -13,16 +40,33 @@ export default function Sidebar() {
         </div>
 
         {/* Sidebar menu */}
-        <ul className="tw-menu tw-w-full">
-          <li onClick={function(){sessionStorage.setItem("page", "dashboard"); location.reload();}} className="my-1"><a><img src="Beranda.svg" alt="Beranda" className="tw-w-[24px] tw-h-[24px] me-1" /><div className="tw-font-semibold tw-text-sm">Beranda</div></a></li>
-          <li onClick={function(){sessionStorage.setItem("page", "assignments"); location.reload();}} className="my-1"><a><img src="Tugas.svg" alt="Tugas" className="tw-w-[24px] tw-h-[24px] me-1" /><div className="tw-font-semibold tw-text-sm">Tugas</div></a></li>
-          <li onClick={function(){sessionStorage.setItem("page", "classrooms"); location.reload();}} className="my-1"><a><img src="Kelas.svg" alt="Kelas" className="tw-w-[24px] tw-h-[24px] me-1" /><div className="tw-font-semibold tw-text-sm">Kelas</div></a></li>
+        <ul className="tw-w-full px-3">
+          {menuItems.map((item, index) => (
+            <MenuItem
+              key={index}
+              onClick={() => handleMenuClick(item.page)}
+              src={item.src}
+              alt={item.alt}
+              text={item.text}
+              className=""
+            />
+          ))}
         </ul>
 
         {/* Settings and logout */}
-        <ul className="tw-menu tw-w-full">
-          <li className="my-1"><a><img src="Pengaturan.svg" alt="Pengaturan" className="tw-w-[24px] tw-h-[24px] me-1" /><div className="tw-font-semibold tw-text-sm">Pengaturan</div></a></li>
-          <li onClick={function(){localStorage.clear(); location.reload();}} className="my-1"><a><img src="Logout.svg" alt="Logout" className="tw-w-[24px] tw-h-[24px] me-1" /><div className="tw-font-semibold tw-text-sm">Logout</div></a></li>
+        <ul className="tw-w-full px-3">
+          <MenuItem
+            onClick={null}
+            src="Pengaturan.svg"
+            alt="Pengaturan"
+            text="Pengaturan"
+          />
+          <MenuItem
+            onClick={handleLogout}
+            src="Logout.svg"
+            alt="Logout"
+            text="Logout"
+          />
         </ul>
       </div>
     </>

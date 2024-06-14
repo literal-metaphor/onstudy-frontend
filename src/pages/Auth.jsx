@@ -4,12 +4,12 @@ import { api } from "../utils/API";
 
 export default function Auth() {
   async function handleAuth(email, name, password) {
-    const response = await api.post('/users/auth', { email, name, password });
-    if (response.status === 200) {
+    try {
+      const response = await api.post('/users/auth', { email, name, password });
       localStorage.setItem('user', JSON.stringify(response.data));
       location.reload();
-    } else {
-      alert(response.data.message);
+    } catch (error) {
+      alert(error.response.data.message);
     }
   }
 
@@ -58,7 +58,7 @@ export default function Auth() {
               <div className="tw-label">
                 <span className="tw-label-text">Email</span>
               </div>
-              <input name="email" required type="text" placeholder="Email" className="tw-input tw-input-bordered tw-w-full" />
+              <input name="email" required type="email" placeholder="Email" className="tw-input tw-input-bordered tw-w-full" />
             </label>
             <label className="tw-form-control tw-w-full">
               <div className="tw-label">
@@ -87,7 +87,7 @@ export default function Auth() {
           <br /><br />
 
           {/* TOS */}
-          <p className="w-100">Dengan mendaftar, Anda menyetujui <span className="tw-text-blue">Kebijakan Layanan dan Privasi</span> kami.</p>
+          <p className="w-100">Dengan mendaftar, Anda menyetujui <span className="tw-text-blue hover:tw-cursor-pointer">Kebijakan Layanan dan Privasi</span> kami.</p>
         </div>
       </div>
     </>

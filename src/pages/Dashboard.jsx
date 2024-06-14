@@ -15,13 +15,13 @@ function Notification() {
 function Stats({ text, num, img, color = 'black' }) {
   return (
     <>
-      <div className={`p-4 my-3 tw-bg-white tw-rounded-lg border-1 tw-border-grey`} style={{ color }}>
+      <div className={`p-3 mb-3  tw-bg-white tw-rounded-lg border-1 tw-border-grey w-100` } style={{ color }}>
         <div className="d-flex align-items-center">
-          <img src={img} alt={text} className="tw-w-[32px] tw-h-[32px] me-3" />
-          <span className="tw-font-semibold tw-text-2xl">{text}</span>
+          <img src={img} alt={text} className="tw-w-[1.25rem] tw-h-[1.25rem] me-3" />
+          <span className="tw-font-semibold tw-text-1xl">{text}</span>
         </div>
-        <br />
-        <span className={`tw-font-semibold tw-text-4xl tw-text-${color}`}>{num}</span>
+        <div className="tw-mt-3"></div>
+        <span className= {`tw-font-semibold tw-mt-3 tw-text-2xl tw-text-${color}`}>{num}</span>
       </div>
     </>
   )
@@ -51,10 +51,10 @@ export default function Dashboard() {
           </main>
 
           {/* Empty gap */}
-          <div className="col-1"></div>
+          <div className="col-2"></div>
 
           {/* Aside content: Stats */}
-          <aside className="col-4">
+          <aside className="col-3">
             <Stats text="Total Tugas" num="5" img="Total.svg" />
             <Stats text="Terselesaikan" num="5" img="Completed.svg" />
             <Stats text="Terlambat" num="5" img="Late.svg" />

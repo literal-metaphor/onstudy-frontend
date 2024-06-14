@@ -9,8 +9,16 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   useEffect(function(){
     async function verify(remember_token) {
-      const response = await api.get(`/users/verify?remember_token=${remember_token}`);
-      return response.data.message === "Verified";
+      try {
+        const response = await api.get(`/users/verify?remember_token=${remember_token}`);
+        return response.data.message === "Verified";
+      } catch(err) {
+        // Delete invalid data and cache
+        localStorage.clear();
+        sessionStorage.clear();
+        location.reload();
+        return false;
+      }
     }
 
     if (localStorage.getItem('user')) {
