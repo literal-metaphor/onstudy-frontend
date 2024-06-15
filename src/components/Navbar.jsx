@@ -1,8 +1,11 @@
 import { api } from "../utils/API";
 import { cacheData } from "../utils/Cache"
 import { store } from "../utils/Store";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [name, setName] = useState(cacheData.userData.name);
+
   async function uploadPhoto(e) {
     e.preventDefault();
     try {
@@ -28,6 +31,25 @@ export default function Navbar() {
     }
   }
 
+  async function updateName(e) {
+    e.preventDefault();
+    if (e.target.value) {
+      try {
+        setName(e.target.value);
+        // Format input into an API-readable form data
+        const formData = new FormData();
+        formData.append("id", cacheData.userData.id);
+        formData.append("name", e.target.value);
+  
+        const res = await api.post("/users/profile", formData)
+  
+        localStorage.setItem("user", JSON.stringify(res.data));
+      } catch(err) {
+        alert("Kesalahan saat update nama");
+      }
+    }
+  }
+
   return (
     <>
       {/* Profile (hidden) modal */}
@@ -40,12 +62,20 @@ export default function Navbar() {
           {/* Profile content */}
           <div className="container tw-w-fit p-2 d-flex flex-column justify-content-center align-items-center">
             <form encType="multipart/form-data">
-              <label className="tw-w-[48px] tw-h-[48px] tw-rounded-full mb-4 relative">
+              <label className="tw-w-[48px] tw-h-[48px] tw-rounded-full mb-3 relative">
                 <img src={`${store+cacheData.userData.photo || "UserPlaceholder.svg"}`} alt="User Profile" className="tw-w-[48px] tw-h-[48px] tw-object-cover hover:tw-opacity-75 hover:tw-cursor-pointer tw-rounded-full" />
-                <input onChange={uploadPhoto} type="file" accept="image/*" className="tw-w-full tw-h-full tw-opacity-0 absolute top-0" />
+                <input onChange={uploadPhoto} type="file" accept="image/*" className="tw-hidden tw-opacity-0 absolute top-0" />
               </label>
             </form>
-            <h1 className="tw-text-xl tw-font-semibold d-flex align-items-center mb-1">{cacheData.userData.name} <img src="Edit.svg" alt="Edit name" className="tw-w-[12px] tw-h-[12px] ms-1" /></h1>
+            <div className="tw-relative mb-2">
+              <input
+                type="text"
+                className="tw-input tw-input-bordered tw-w-full tw-py-2"
+                defaultValue={name}
+                onBlur={function(e){if(!e.target.value)e.target.value=name;updateName(e)}}
+              />
+              <img src="Edit.svg" alt="Edit name" className="tw-w-[12px] tw-h-[12px] tw-absolute tw-top-2 tw-right-2" />
+            </div>
             <span className="tw-text-sm tw-opacity-50">{cacheData.userData.email}</span>
           </div>
         </div>
@@ -63,7 +93,7 @@ export default function Navbar() {
           <div onClick={function(){document.getElementById('profile_modal').showModal();}} className="d-flex align-items-center hover:tw-cursor-pointer hover:tw-bg-grey tw-transition tw-duration-300 active:tw-scale-95 p-2 tw-rounded-lg me-3">
             <img src={`${store+cacheData.userData.photo || "UserPlaceholder.svg"}`} alt="Profile" className="tw-w-[48px] tw-h-[48px] me-3 tw-rounded-full" />
             <div className="d-flex flex-column">
-              <span className="d-flex align-items-center tw-text-lg">{cacheData.userData.name} <img src="Edit.svg" alt="Edit profile" className="tw-w-[12px] tw-h-[12px] ms-1" /></span>
+              <span className="d-flex align-items-center tw-text-lg">{name} <img src="Edit.svg" alt="Edit profile" className="tw-w-[12px] tw-h-[12px] ms-1" /></span>
               <span className="tw-text-sm">{cacheData.userData.email}</span>
             </div>
           </div>
