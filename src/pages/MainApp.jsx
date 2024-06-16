@@ -4,9 +4,12 @@ import Classrooms from "./Classrooms";
 import Dashboard from "./Dashboard";
 
 import { page } from "../utils/Page";
+import Assignments from "./Assignments";
 
 // eslint-disable-next-line react/prop-types
 export default function MainApp({ cacheData, updateCacheData }) {
+  const cacheProps = { cacheData, updateCacheData };
+
   return (
     <>
       {page !== "quiz" && (
@@ -15,9 +18,10 @@ export default function MainApp({ cacheData, updateCacheData }) {
           <Sidebar/>
           {/* Main content occupies remaining columns */}
           <div className="col-10">
-            <Navbar cacheData={cacheData} updateCacheData={updateCacheData} />
-            {page === "dashboard" && <Dashboard cacheData={cacheData} />}
-            {page === "classrooms" && <Classrooms cacheData={cacheData} />}
+            <Navbar {...cacheProps}/>
+            {page === "dashboard" && <Dashboard {...cacheProps} />}
+            {page === "classrooms" && <Classrooms {...cacheProps} />}
+            {page === "assignments" && <Assignments {...cacheProps} />}
           </div>
         </div>
       )}

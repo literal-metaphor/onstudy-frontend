@@ -60,7 +60,7 @@ export default function Navbar({ cacheData, updateCacheData }) {
           <div className="container tw-w-fit p-2 d-flex flex-column justify-content-center align-items-center">
             <form encType="multipart/form-data">
               <label className="tw-w-[48px] tw-h-[48px] tw-rounded-full mb-3 relative">
-                <img src={`${store+cacheData.userData.photo || "UserPlaceholder.svg"}`} alt="User Profile" className="tw-w-[48px] tw-h-[48px] tw-object-cover hover:tw-opacity-75 hover:tw-cursor-pointer tw-rounded-full" />
+                <img src={`${cacheData.userData.photo ? store + cacheData.userData.photo : "UserPlaceholder.svg" || "UserPlaceholder.svg"}`} alt="User Profile" className="tw-w-[48px] tw-h-[48px] tw-object-cover hover:tw-opacity-75 hover:tw-cursor-pointer tw-rounded-full" />
                 <input onChange={uploadPhoto} type="file" accept="image/*" className="tw-hidden tw-opacity-0 absolute top-0" />
               </label>
             </form>
@@ -88,7 +88,7 @@ export default function Navbar({ cacheData, updateCacheData }) {
         {/* User profile */}
         <div className="d-flex align-items-center">
           <div onClick={function(){document.getElementById('profile_modal').showModal();}} className="d-flex align-items-center hover:tw-cursor-pointer hover:tw-bg-grey tw-transition tw-duration-300 active:tw-scale-95 p-2 tw-rounded-lg me-3">
-            <img src={`${store+cacheData.userData.photo || "UserPlaceholder.svg"}`} alt="Profile" className="tw-w-[48px] tw-h-[48px] me-3 tw-rounded-full" />
+            <img src={`${cacheData.userData.photo ? store + cacheData.userData.photo : "UserPlaceholder.svg" || "UserPlaceholder.svg"}`} alt="Profile" className="tw-w-[48px] tw-h-[48px] me-3 tw-rounded-full" />
             <div className="d-flex flex-column">
               <span className="d-flex align-items-center tw-text-lg">{cacheData.userData.name} <img src="Edit.svg" alt="Edit profile" className="tw-w-[12px] tw-h-[12px] ms-1" /></span>
               <span className="tw-text-sm">{cacheData.userData.email}</span>

@@ -26,7 +26,7 @@ function Classroom({ id, name, teacher, subject}) {
   )
 }
 
-export default function Classrooms() {
+export default function Classrooms({ cacheData, updateCacheData }) {
   return (
     <>
       <div className="container p-4">

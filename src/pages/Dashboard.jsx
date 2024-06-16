@@ -25,7 +25,7 @@ function Stats({ text, num, img, color = 'black' }) {
   )
 }
 
-export default function Dashboard({ cacheData }) {
+export default function Dashboard({ cacheData, updateCacheData }) {
   return (
     <>
       <div className="container p-4">
