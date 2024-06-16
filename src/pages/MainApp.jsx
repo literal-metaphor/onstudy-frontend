@@ -1,10 +1,12 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import { page } from "../utils/Page";
 import Classrooms from "./Classrooms";
 import Dashboard from "./Dashboard";
 
-export default function MainApp() {
+import { page } from "../utils/Page";
+
+// eslint-disable-next-line react/prop-types
+export default function MainApp({ cacheData, updateCacheData }) {
   return (
     <>
       {page !== "quiz" && (
@@ -13,9 +15,9 @@ export default function MainApp() {
           <Sidebar/>
           {/* Main content occupies remaining columns */}
           <div className="col-10">
-            <Navbar/>
-            {page === "dashboard" && <Dashboard/>}
-            {page === "classrooms" && <Classrooms/>}
+            <Navbar cacheData={cacheData} updateCacheData={updateCacheData} />
+            {page === "dashboard" && <Dashboard cacheData={cacheData} />}
+            {page === "classrooms" && <Classrooms cacheData={cacheData} />}
           </div>
         </div>
       )}

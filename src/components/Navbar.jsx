@@ -1,11 +1,8 @@
+/* eslint-disable react/prop-types */
 import { api } from "../utils/API";
-import { cacheData } from "../utils/Cache"
 import { store } from "../utils/Store";
-import { useState } from "react";
 
-export default function Navbar() {
-  const [name, setName] = useState(cacheData.userData.name);
-
+export default function Navbar({ cacheData, updateCacheData }) {
   async function uploadPhoto(e) {
     e.preventDefault();
     try {
@@ -24,7 +21,7 @@ export default function Navbar() {
         });
 
         localStorage.setItem("user", JSON.stringify(res.data));
-        location.reload();
+        updateCacheData();
       }
     } catch (err) {
       alert("Kesalahan saat upload foto");
@@ -35,7 +32,6 @@ export default function Navbar() {
     e.preventDefault();
     if (e.target.value) {
       try {
-        setName(e.target.value);
         // Format input into an API-readable form data
         const formData = new FormData();
         formData.append("id", cacheData.userData.id);
@@ -44,6 +40,7 @@ export default function Navbar() {
         const res = await api.post("/users/profile", formData)
   
         localStorage.setItem("user", JSON.stringify(res.data));
+        updateCacheData();
       } catch(err) {
         alert("Kesalahan saat update nama");
       }
@@ -71,8 +68,8 @@ export default function Navbar() {
               <input
                 type="text"
                 className="tw-input tw-input-bordered tw-w-full tw-py-2"
-                defaultValue={name}
-                onBlur={function(e){if(!e.target.value)e.target.value=name;updateName(e)}}
+                defaultValue={cacheData.userData.name}
+                onBlur={function(e){if(!e.target.value)e.target.value=cacheData.userData.name;updateName(e)}}
               />
               <img src="Edit.svg" alt="Edit name" className="tw-w-[12px] tw-h-[12px] tw-absolute tw-top-2 tw-right-2" />
             </div>
@@ -93,7 +90,7 @@ export default function Navbar() {
           <div onClick={function(){document.getElementById('profile_modal').showModal();}} className="d-flex align-items-center hover:tw-cursor-pointer hover:tw-bg-grey tw-transition tw-duration-300 active:tw-scale-95 p-2 tw-rounded-lg me-3">
             <img src={`${store+cacheData.userData.photo || "UserPlaceholder.svg"}`} alt="Profile" className="tw-w-[48px] tw-h-[48px] me-3 tw-rounded-full" />
             <div className="d-flex flex-column">
-              <span className="d-flex align-items-center tw-text-lg">{name} <img src="Edit.svg" alt="Edit profile" className="tw-w-[12px] tw-h-[12px] ms-1" /></span>
+              <span className="d-flex align-items-center tw-text-lg">{cacheData.userData.name} <img src="Edit.svg" alt="Edit profile" className="tw-w-[12px] tw-h-[12px] ms-1" /></span>
               <span className="tw-text-sm">{cacheData.userData.email}</span>
             </div>
           </div>

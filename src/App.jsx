@@ -3,7 +3,8 @@ import Auth from "./pages/Auth";
 import { api } from "./utils/API";
 import MainApp from "./pages/MainApp";
 
-export default function App() {
+// eslint-disable-next-line react/prop-types
+export default function App({ cacheData, updateCacheData }) {
   // Guard script to prevent unauthorized access
   const [auth, setAuth] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,7 +37,7 @@ export default function App() {
   // Render based on auth and loading states
   return (
     <>
-      {!loading && (auth ? <MainApp/> : <Auth/>)}
+      {!loading && (auth ? <MainApp cacheData={cacheData} updateCacheData={updateCacheData} /> : <Auth/>)}
     </>
   );
 }

@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import { cacheData } from "../utils/Cache";
-
 function Notification() {
   return (
     <>
@@ -27,7 +25,7 @@ function Stats({ text, num, img, color = 'black' }) {
   )
 }
 
-export default function Dashboard() {
+export default function Dashboard({ cacheData }) {
   return (
     <>
       <div className="container p-4">
