@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { api } from "../utils/API";
 import { store } from "../utils/Store";
 
-export default function Navbar({ cacheData, updateCacheData }) {
+export default function Navbar({ cacheData, updateCacheData, syncWithServer }) {
+  const [loadingSync, setLoadingSync] = useState(false);
+
   async function uploadPhoto(e) {
     e.preventDefault();
     try {
@@ -45,6 +48,19 @@ export default function Navbar({ cacheData, updateCacheData }) {
         alert("Kesalahan saat update nama");
       }
     }
+  }
+
+  async function actionSyncServer() {
+    setLoadingSync(true);
+
+    try {
+      syncWithServer();
+    } catch (err) {
+      console.error(err);
+      alert("Kesalahan saat sinkronisasi server");
+    }
+
+    setLoadingSync(false);
   }
 
   return (
@@ -94,7 +110,7 @@ export default function Navbar({ cacheData, updateCacheData }) {
               <span className="tw-text-sm">{cacheData.userData.email}</span>
             </div>
           </div>
-          <img src="Sync.svg" alt="Sync cache" className="tw-w-[32px] tw-h-[32px] hover:tw-opacity-75 hover:tw-cursor-pointer tw-transition tw-duration-300 active:tw-scale-90" />
+          <img onClick={actionSyncServer} src="Sync.svg" alt="Sync cache" className={`tw-w-[32px] tw-h-[32px] hover:tw-opacity-75 hover:tw-cursor-pointer tw-transition tw-duration-300 active:tw-scale-90 ${loadingSync && "tw-animate-spin"}`} />
         </div>
       </div>
     </>

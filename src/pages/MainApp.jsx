@@ -1,14 +1,14 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import Classrooms from "./Classrooms";
 import Dashboard from "./Dashboard";
-
-import { page } from "../utils/Page";
+import Classrooms from "./Classrooms";
 import Assignments from "./Assignments";
+import Classroom from "./Classroom";
+import { page } from "../utils/Page";
 
 // eslint-disable-next-line react/prop-types
-export default function MainApp({ cacheData, updateCacheData }) {
-  const cacheProps = { cacheData, updateCacheData };
+export default function MainApp({ cacheData, updateCacheData, syncWithServer }) {
+  const cacheProps = { cacheData, updateCacheData, syncWithServer };
 
   return (
     <>
@@ -22,6 +22,7 @@ export default function MainApp({ cacheData, updateCacheData }) {
             {page === "dashboard" && <Dashboard {...cacheProps} />}
             {page === "classrooms" && <Classrooms {...cacheProps} />}
             {page === "assignments" && <Assignments {...cacheProps} />}
+            {page === "classroom" && <Classroom {...cacheProps} />}
           </div>
         </div>
       )}
