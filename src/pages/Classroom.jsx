@@ -4,7 +4,8 @@ import { useState } from "react";
 function Assignment({ id, title, teacher }) {
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center p-4 my-3 tw-bg-white tw-rounded-lg border-1 tw-border-grey">
+      <div onClick={() => {//sessionStorage.setItem("assignment_id", id); sessionStorage.setItem("page", "assignment"); location.reload();
+      alert("Fitur masih dalam konstruksi")}} className="d-flex align-items-center p-4 my-3 tw-bg-white tw-rounded-lg border-1 tw-border-grey hover:tw-cursor-pointer hover:tw-scale-95 tw-transition tw-duration-300">
         <img src="TaskCard.svg" alt="Task" className="tw-w-[48px] tw-h-[48px] me-3" />
         <span>{teacher} mengunggah tugas baru: {title.slice(0, 30) + (title.length > 30 ? '...' : '')}</span>
       </div>

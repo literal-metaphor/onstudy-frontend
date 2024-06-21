@@ -50,19 +50,6 @@ export default function Navbar({ cacheData, updateCacheData, syncWithServer }) {
     }
   }
 
-  async function actionSyncServer() {
-    setLoadingSync(true);
-
-    try {
-      syncWithServer();
-    } catch (err) {
-      console.error(err);
-      alert("Kesalahan saat sinkronisasi server");
-    }
-
-    setLoadingSync(false);
-  }
-
   return (
     <>
       {/* Profile (hidden) modal */}
@@ -110,7 +97,11 @@ export default function Navbar({ cacheData, updateCacheData, syncWithServer }) {
               <span className="tw-text-sm">{cacheData.userData.email}</span>
             </div>
           </div>
-          <img onClick={actionSyncServer} src="Sync.svg" alt="Sync cache" className={`tw-w-[32px] tw-h-[32px] hover:tw-opacity-75 hover:tw-cursor-pointer tw-transition tw-duration-300 active:tw-scale-90 ${loadingSync && "tw-animate-spin"}`} />
+          <img onClick={() => {
+            setLoadingSync(true);
+            setTimeout(()=>setLoadingSync(false),10000);
+            syncWithServer();
+          }} src="Sync.svg" alt="Sync cache" className={`tw-w-[32px] tw-h-[32px] hover:tw-opacity-75 hover:tw-cursor-pointer tw-transition tw-duration-300 active:tw-scale-90 ${loadingSync === true && "tw-animate-spin tw-pointer-events-none"}`} />
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-function Notification() {
+function Notification({ text }) {
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center p-4 my-3 tw-bg-white tw-rounded-lg border-1 tw-border-grey">
+      <div onClick={() => alert("Fitur masih dalam konstruksi")} className="d-flex align-items-center p-4 my-3 tw-bg-white tw-rounded-lg border-1 tw-border-grey tw-transition tw-duration-300 hover:tw-scale-95 hover:tw-cursor-pointer">
         <img src="TaskCard.svg" alt="Task" className="tw-w-[48px] tw-h-[48px] me-3" />
-        <span>Dadhang S.Pd mengunggah tugas baru: Alat & Bahan yang diperlu...</span>
+        <span>{text}</span>
       </div>
     </>
   )
@@ -41,11 +41,16 @@ export default function Dashboard({ cacheData, updateCacheData }) {
             {/* Assignment notifications */}
             <div className="d-flex justify-content-between align-items-center">
               <h2 className="tw-font-semibold tw-text-2xl">📚 Tugas</h2>
-              <span className="tw-text-blue">Lihat semua →</span>
+              <span onClick={() => {sessionStorage.setItem("page", "assignments")}} className="tw-text-blue">Lihat semua →</span>
             </div>
-            <Notification/>
-            <Notification/>
-            <Notification/>
+            {cacheData.classroomsData.map((classroom) => {
+              const { teacher } = classroom;
+              const assignments = classroom.assignments.map((assignment) => {
+                return <Notification key={assignment.id} text={`${teacher.name} mengunggah tugas baru: ${assignment.title}`} />
+              });
+              return assignments;
+            })}
+            <span className="tw-text-black tw-opacity-50">Tidak ada tugas baru</span>
           </main>
 
           {/* Empty gap */}
@@ -53,10 +58,10 @@ export default function Dashboard({ cacheData, updateCacheData }) {
 
           {/* Aside content: Stats */}
           <aside className="col-3">
-            <Stats text="Total Tugas" num="5" img="Total.svg" />
-            <Stats text="Terselesaikan" num="5" img="Completed.svg" />
-            <Stats text="Terlambat" num="5" img="Late.svg" />
-            <Stats text="Rata-rata nilai" num="5%" img="C.svg" color="secondary" />
+            <Stats text="Total Tugas" num="0" img="Total.svg" />
+            <Stats text="Terselesaikan" num="0" img="Completed.svg" />
+            <Stats text="Terlambat" num="0" img="Late.svg" />
+            <Stats text="Rata-rata nilai" num="100%" img="A.svg" />
           </aside>
         </div>
       </div>

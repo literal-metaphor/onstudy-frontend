@@ -2,6 +2,7 @@
 
 // Object-oriented ⭐
 import { useEffect, useRef, useState } from "react";
+import { api } from "../utils/API";
 
 /**
  * Class representing an assignment with questions and answers.
@@ -139,12 +140,18 @@ class Assignment {
 
   // TODO: Reorder question number by dragging
 
-  publishAssignment(title, description, classroom, deadline) {
-    alert("nice caulk");
-    // Divide assignment, questions, and answers data into different arrays
-    // let assignmentData = {"title": title, "description": description, "classroom": classroom, "deadline": deadline};
-    // let questionsData = this.getQuestions();
-    // let answersData = questions.map(question => question.answers);
+  publishAssignment(title, description, classroom_id, deadline) {
+    // Set the data to be sent
+    const data = {
+      title,
+      description,
+      classroom_id,
+      deadline,
+      questions: this.getQuestions()
+    };
+
+    // Post to the API
+    api.post('/assignments/create_full_assignment', data).then((response) => { console.log(response) }).catch((err) => { console.log(err) });
   }
 }
 
@@ -163,9 +170,11 @@ export default function CreateAssignment() {
     }
   }
 
-  function publishAssignment() {
+  function publishAssignment(e) {
+    e.preventDefault();
     if (confirm("Apakah kamu yakin mau memposting tugas ini?")) {
-      assignment.publishAssignment();
+      const { title, description, classroom_id, deadline } = e.target;
+      assignment.publishAssignment(title.value, description.value, classroom_id.value, deadline.value);
     }
   }
 
@@ -288,7 +297,7 @@ export default function CreateAssignment() {
             <button className="tw-btn tw-btn-sm tw-btn-circle tw-btn-ghost tw-absolute tw-right-2 tw-top-2">✕</button>
           </form>
 
-          {/* Profile content */}
+          {/* Finalization form */}
           <div className="container tw-w-fit p-4 d-flex flex-column justify-content-center align-items-center">
             <h1 className="tw-text-3xl tw-font-bold">Finalisasi Tugas</h1>
             <form onSubmit={publishAssignment}>
@@ -308,9 +317,15 @@ export default function CreateAssignment() {
                 <div className="tw-label">
                   <span className="tw-label-text">Kelas</span>
                 </div>
-                <select className="tw-select tw-select-bordered">
+                <select name="classroom_id" className="tw-select tw-select-bordered">
                   {JSON.parse(localStorage.getItem("classrooms")).map((classroom) => <option key={classroom.id} value={classroom.id}>{classroom.name}</option>)}
                 </select>
+              </label>
+              <label className="my-2 tw-form-control tw-w-full">
+                <div className="tw-label">
+                  <span className="tw-label-text">Deadline</span>
+                </div>
+                <input type="date" className="hover:tw-cursor-pointer tw-input tw-input-bordered tw-w-full tw-py-2" placeholder="Deadline" name="deadline" required />
               </label>
 
               <br />
@@ -340,9 +355,9 @@ export default function CreateAssignment() {
 
             <br />
 
-            <button onClick={() => document.getElementById("publish_assignment_modal").showModal()} className="p-3 tw-bg-success w-100 tw-rounded-md tw-text-white hover:tw-opacity-75 tw-transition tw-duration-300">Kirim Tugas</button>
+            <button onClick={() => document.getElementById("publish_assignment_modal").showModal()} className="p-3 tw-bg-success w-100 tw-rounded-md tw-text-white hover:tw-opacity-75 tw-transition tw-duration-300">Selesai</button>
             <div className="my-2"/>
-            <button onClick={clearQuestions} className="p-3 tw-bg-danger w-100 tw-rounded-md tw-text-white hover:tw-opacity-75 tw-transition tw-duration-300">🗑 Hapus Semua Soal</button>
+            <button onClick={clearQuestions} className="p-3 tw-bg-danger w-100 tw-rounded-md tw-text-white hover:tw-opacity-75 tw-transition tw-duration-300">Hapus Semua Soal</button>
           </div>
         </div>
 
