@@ -17,8 +17,9 @@ export default function Auth() {
       ? await api.post("/users/register", { email, name, password })
       : await api.post("/users/login", { email, password });
 
-      localStorage.setItem("userData", response.data);
+      localStorage.setItem("userData", JSON.stringify(response.data));
     } catch (err) {
+      console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);
     } finally {
       if (authButtonRef.current) {
