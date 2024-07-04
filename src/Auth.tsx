@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { api } from '../utils/API';
+import { api } from './utils/API';
 
 export default function Auth() {
   const [register, setRegister] = useState(false);
@@ -13,11 +13,18 @@ export default function Auth() {
         authButtonRef.current.className += " opacity-75";
       }
 
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("name", name);
+      formData.append("password", password);
+
       const response = register
-      ? await api.post("/users/register", { email, name, password })
-      : await api.post("/users/login", { email, password });
+      ? await api.post("/users/register", formData)
+      : await api.post("/users/login", formData);
 
       localStorage.setItem("userData", JSON.stringify(response.data));
+
+      location.reload();
     } catch (err) {
       console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);

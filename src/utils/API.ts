@@ -7,3 +7,5 @@ export const api = axios.create({
     "Content-Type": "multipart/form-data",
   }
 });
+
+export const store = "http://localhost:8000/storage/uploads/";
