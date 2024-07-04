@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { api } from './utils/API';
+import { UserData } from './utils/types/UserData';
 
 export default function Auth() {
   const [register, setRegister] = useState(false);
@@ -22,7 +23,9 @@ export default function Auth() {
       ? await api.post("/users/register", formData)
       : await api.post("/users/login", formData);
 
-      localStorage.setItem("userData", JSON.stringify(response.data));
+      const userData: UserData = response.data;
+
+      localStorage.setItem("userData", JSON.stringify(userData));
 
       location.reload();
     } catch (err) {

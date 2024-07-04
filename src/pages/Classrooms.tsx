@@ -1,8 +1,8 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { api } from "../utils/API";
+import { ClassroomData } from "../utils/types/ClassroomData";
 
 function Classroom({ id, name, teacher, subject}: { id: string, name: string, teacher: string, subject: string }) {
-
   const colors = {
     'Sains': "#DCF3ED",
     'Matematika': "#F3E4DF",
@@ -31,70 +31,90 @@ function Classroom({ id, name, teacher, subject}: { id: string, name: string, te
 }
 
 export default function Classrooms() {
+  const userData = JSON.parse(localStorage.getItem("userData")!);
+  const [classroomsData, setClassroomsData] = useState<ClassroomData[]>(JSON.parse(localStorage.getItem("classrooms")!));
+
+  const syncClassrooms = useCallback(async (): Promise<boolean> => {
+    try {
+      const response = await api.post("/classrooms/get_classrooms_by_user_id", { id: userData.id });
+      const classrooms: ClassroomData[] = response.data;
+      setClassroomsData(classrooms);
+      localStorage.setItem("classrooms", JSON.stringify(classrooms));
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  }, [userData.id, setClassroomsData]);
+
+  useEffect(() => {
+    syncClassrooms();
+  }, [syncClassrooms]);
+
   const createClassroomRef = useRef<HTMLButtonElement>(null);
   const joinClassroomRef = useRef<HTMLButtonElement>(null);
 
-  async function createClassroom(e) {
+  async function createClassroom(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    formData.append("user_id", userData.id);
 
     try {
-      // Create classroom
-      const response = await api.post("/classrooms/create", formData);
-      const classroom = response.data;
-
-      // Join classroom as teacher
-      await api.post("/user_classrooms/create", { user_id: cacheData.userData.id, classroom_id: response.data.id, role: "Teacher" });
-
-      // Update classroom cache
-      if (JSON.parse(localStorage.getItem("classrooms"))) {
-        let classrooms = JSON.parse(localStorage.getItem("classrooms"));
-        classroom["teacher"] = cacheData.userData;
-        localStorage.setItem("classrooms", JSON.stringify([...classrooms, classroom]));
-      } else {
-        let classrooms = classroom;
-        classroom["teacher"] = cacheData.userData;
-        localStorage.setItem("classrooms", JSON.stringify([classrooms]));
+      // Render loading on button
+      if (createClassroomRef.current) {
+        createClassroomRef.current.innerHTML = '<div class="animate-spin" id="join_classroom_loading">⟳</div>';
+        createClassroomRef.current.disabled = true;
       }
 
-      updateCacheData();
+      // Create classroom
+      const response = await api.post("/classrooms/create_classroom", formData);
+      const classroom = response.data;
+
+      // Update classroom cache
+      setClassroomsData([...classroomsData, classroom]);
+      localStorage.setItem("classrooms", JSON.stringify([...classroomsData, classroom]));
     } catch (err) {
-      alert(err.response.data.message);
+      console.log(err);
+      alert((err as { response: { data: { message: string } } }).response.data.message);
+    } finally {
+      // Loading done
+      if (createClassroomRef.current) {
+        createClassroomRef.current.innerHTML = 'Buat';
+        createClassroomRef.current.disabled = false;
+      }
     }
   }
 
-  async function handleJoinClassroom(e) {
+  async function handleJoinClassroom(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Render loading on button
-    joinClassroomRef.current.innerHTML = '<div class="animate-spin" id="join_classroom_loading">⟳</div>';
-    joinClassroomRef.current.disabled = true;
-    joinClassroomRef.current.className = "w-full py-3 bg-primary rounded-md text-white opacity-75";
+    const formData = new FormData(e.currentTarget);
+    formData.append("user_id", userData.id);
 
     try {
+      // Render loading on button
+      if (joinClassroomRef.current) {
+        joinClassroomRef.current.innerHTML = '<div class="animate-spin" id="join_classroom_loading">⟳</div>';
+        joinClassroomRef.current.disabled = true;
+      }
+
       // Join classroom as student
-      await api.post('/user_classrooms/create', { user_id: cacheData.userData.id, classroom_id: e.target.id.value, role: "Student" });
-      const classroom = await api.get('/classrooms/read', { id: e.target.id.value }).then((res) => res.data);
+      const response = await api.post("/classrooms/join_classroom", formData);
+      const classroom = response.data;
 
       // Update classroom cache
-      if (JSON.parse(localStorage.getItem("classrooms"))) {
-        let classrooms = JSON.parse(localStorage.getItem("classrooms"));
-        classroom["teacher"] = await api.get('user_classrooms/get_teacher', { id: e.target.id.value, role: "Teacher" }).then((res) => res.data);
-        localStorage.setItem("classrooms", JSON.stringify([...classrooms, classroom]));
-      } else {
-        let classrooms = classroom;
-        classroom["teacher"] = await api.get('user_classrooms/get_teacher', { id: e.target.id.value, role: "Teacher" }).then((res) => res.data);
-        localStorage.setItem("classrooms", JSON.stringify([classrooms]));
-      }
+      setClassroomsData([...classroomsData, classroom]);
+      localStorage.setItem("classrooms", JSON.stringify([...classroomsData, classroom]));
     } catch (err) {
       console.log(err);
-      alert("Kode tidak valid");
+      alert((err as { response: { data: { message: string } } }).response.data.message);
     } finally {
       // Loading done
-      joinClassroomRef.current.innerHTML = 'Masuk';
-      joinClassroomRef.current.disabled = false;
-      joinClassroomRef.current.className = "w-full py-3 bg-primary rounded-md text-white hover:opacity-75";
+      if (joinClassroomRef.current) {
+        joinClassroomRef.current.innerHTML = 'Masuk';
+        joinClassroomRef.current.disabled = false;
+      }
     }
   }
 
@@ -111,7 +131,7 @@ export default function Classrooms() {
             <form onSubmit={handleJoinClassroom} encType="multipart/form-data" className="p-4">
               <input
                 type="text"
-                name="id"
+                name="classroom_id"
                 className="input input-bordered w-full py-2 mb-4"
                 placeholder="Salin kode kelas di sini..."
               />
@@ -133,7 +153,7 @@ export default function Classrooms() {
 
             {/* Classrooms */}
             <div className="grid grid-cols-2">
-              <p className="my-4">Kamu masih belum bergabung dengan kelas apapun.</p>
+              {classroomsData && classroomsData[0] ? classroomsData.map((val, i) => (<Classroom key={i} id={val.id} name={val.name} teacher={val.teacher.name} subject={val.subject} />)) : (<p className="my-4">Kamu masih belum bergabung dengan kelas apapun.</p>)}
               {/* <Classroom id="0" name="Belum ada kelas" teacher="Belum ada kelas" subject="Sains" />
               <Classroom id="1" name="Belum ada kelas" teacher="Belum ada kelas" subject="Matematika" />
               <Classroom id="2" name="Belum ada kelas" teacher="Belum ada kelas" subject="Informatika" /> */}

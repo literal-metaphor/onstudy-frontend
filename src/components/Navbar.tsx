@@ -3,10 +3,7 @@ import { api, store } from "../utils/API";
 import { UserData } from "../utils/types/UserData";
 
 export default function Navbar() {
-  const [userData, setUserData] = useState<UserData>(() => {
-    const userDataString = localStorage.getItem("userData");
-    return JSON.parse(userDataString!);
-  });
+  const [userData, setUserData] = useState<UserData>(JSON.parse(localStorage.getItem("userData")!));
 
   async function uploadPhoto(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
