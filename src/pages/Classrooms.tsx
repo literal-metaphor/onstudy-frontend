@@ -39,7 +39,7 @@ export default function Classrooms() {
       const response = await api.post("/classrooms/get_classrooms_by_user_id", { id: userData.id });
       const classrooms: ClassroomData[] = response.data;
       setClassroomsData(classrooms);
-      localStorage.setItem("classrooms", JSON.stringify(classrooms));
+      localStorage.setItem("classroomsData", JSON.stringify(classrooms));
       return true;
     } catch (err) {
       console.log(err);
@@ -73,7 +73,7 @@ export default function Classrooms() {
 
       // Update classroom cache
       setClassroomsData([...classroomsData, classroom]);
-      localStorage.setItem("classrooms", JSON.stringify([...classroomsData, classroom]));
+      localStorage.setItem("classroomsData", JSON.stringify([...classroomsData, classroom]));
     } catch (err) {
       console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);
@@ -105,7 +105,7 @@ export default function Classrooms() {
 
       // Update classroom cache
       setClassroomsData([...classroomsData, classroom]);
-      localStorage.setItem("classrooms", JSON.stringify([...classroomsData, classroom]));
+      localStorage.setItem("classroomsData", JSON.stringify([...classroomsData, classroom]));
     } catch (err) {
       console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);
@@ -154,14 +154,6 @@ export default function Classrooms() {
             {/* Classrooms */}
             <div className="grid grid-cols-2">
               {classroomsData && classroomsData[0] ? classroomsData.map((val, i) => (<Classroom key={i} id={val.id} name={val.name} teacher={val.teacher.name} subject={val.subject} />)) : (<p className="my-4">Kamu masih belum bergabung dengan kelas apapun.</p>)}
-              {/* <Classroom id="0" name="Belum ada kelas" teacher="Belum ada kelas" subject="Sains" />
-              <Classroom id="1" name="Belum ada kelas" teacher="Belum ada kelas" subject="Matematika" />
-              <Classroom id="2" name="Belum ada kelas" teacher="Belum ada kelas" subject="Informatika" /> */}
-              {/* {Array.isArray(cacheData.classroomsData) ? cacheData.classroomsData.map(function(val, i) {
-                return (
-                  <Classroom key={i} id={val.id} name={val.name} teacher={val.teacher.name} subject={val.subject} />
-                )
-              }) : null} */}
             </div>
           </div>
 

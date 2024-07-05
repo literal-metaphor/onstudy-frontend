@@ -3,7 +3,7 @@ import { api } from './utils/API';
 import { UserData } from './utils/types/UserData';
 
 export default function Auth() {
-  const [register, setRegister] = useState(false);
+  const [register, setRegister] = useState<boolean>(false);
   const authButtonRef = useRef<HTMLButtonElement>(null);
 
   async function handleAuth(email: string, name: string, password: string) {
@@ -33,7 +33,7 @@ export default function Auth() {
       alert((err as { response: { data: { message: string } } }).response.data.message);
     } finally {
       if (authButtonRef.current) {
-        authButtonRef.current.innerHTML = register ? "Register" : "Login";
+        authButtonRef.current.innerHTML = register ? "Daftar" : "Login";
         authButtonRef.current.disabled = false;
         authButtonRef.current.className = authButtonRef.current.className.replace(/ ?opacity-75/g, "");
       }
