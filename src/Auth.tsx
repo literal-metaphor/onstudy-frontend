@@ -40,10 +40,6 @@ export default function Auth() {
     }
   }
 
-  async function googleOauth() {
-    alert("Fitur masih dalam konstruksi");
-  }
-
   return (
     <>
       <div className="w-screen flex justify-center items-center">
@@ -90,7 +86,7 @@ export default function Auth() {
               </div>
               <input name="password" required type="password" placeholder="Password" className="input input-bordered w-full" />
             </label>
-            {!register && (<p className="text-blue text-sm float-right mt-2 hover:cursor-pointer">Lupa password?</p>)}
+            {/* {!register && (<p className="text-blue text-sm float-right mt-2 hover:cursor-pointer">Lupa password?</p>)} */}
 
             <br /><br />
 
@@ -101,13 +97,13 @@ export default function Auth() {
             </div>
           </form>
 
-          <div className="divider"/>
+          {/* <div className="divider"/> */}
 
           {/* OAuth with Google */}
-          <button onClick={googleOauth} className="flex items-center w-full px-3 py-3 border border-grey rounded-md text-black hover:bg-grey">
+          {/* <button onClick={googleOauth} className="flex items-center w-full px-3 py-3 border border-grey rounded-md text-black hover:bg-grey">
             <img src="Google.svg" alt="Google" className="w-[24px] h-[24px] me-2" />
             <span>Lanjutkan dengan Google</span>
-          </button>
+          </button> */}
 
           <br />
 

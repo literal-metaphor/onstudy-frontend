@@ -263,7 +263,7 @@ export default function CreateAssignment() {
           </div>
         </div>
 
-        <div className="border border-grey rounded-lg p-4 w-[45vw] h-[90vh] overflow-y-scroll overflow-x-hidden">
+        <div className="border border-grey rounded-lg p-4 w-[45vw] h-[90vh] overflow-y-auto overflow-x-hidden">
           {questions.map((_question, i) => (
             <Question key={i} index={i} />
           ))}

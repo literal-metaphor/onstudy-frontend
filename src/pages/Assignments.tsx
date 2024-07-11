@@ -53,7 +53,7 @@ export default function Assignments() {
         };
       });
 
-      return assignmentsWithClassroom;
+      return assignmentsWithClassroom.sort((a, b) => a.created_at > b.created_at ? -1 : 1);
     } catch (err) {
       console.error(err);
       alert(err);
@@ -73,7 +73,7 @@ export default function Assignments() {
             </div>
 
             {/* Assignment Card */}
-            {assignments ? assignments.map((assignment) => <Assignment key={assignment.id} id={assignment.id} classroom={assignment.classroom.name} title={assignment.title} description={assignment.description} teacher={assignment.classroom.teacher.name} teacherPhoto={assignment.classroom.teacher.photo} deadline={assignment.deadline} counts={assignment.questions.length} />) : (<><br/><span className="text-black opacity-50">Tidak ada tugas baru</span> <br /> <span onClick={() => location.reload()} className="text-blue hover:cursor-pointer hover:underline">Muat ulang jika Anda yakin ada kesalahan.</span></>)}
+            {assignments && assignments.length > 0 ? assignments.map((assignment) => <Assignment key={assignment.id} id={assignment.id} classroom={assignment.classroom.name} title={assignment.title} description={assignment.description} teacher={assignment.classroom.teacher.name} teacherPhoto={assignment.classroom.teacher.photo} deadline={assignment.deadline} counts={assignment.questions.length} />) : (<><br/><span className="ms-4 text-black">Tidak ada tugas apapun.</span> <br /> <span onClick={() => location.reload()} className="ms-4 text-blue hover:cursor-pointer hover:underline">Muat ulang jika Anda yakin ada kesalahan.</span></>)}
           </div>
         </div>
       </div>

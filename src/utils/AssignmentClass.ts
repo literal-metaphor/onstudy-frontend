@@ -40,6 +40,7 @@ export default class Assignment implements AssignmentData {
       this.addQuestion();
     }
   }
+  [key: string]: unknown;
 
   /**
    * Returns the questions array.

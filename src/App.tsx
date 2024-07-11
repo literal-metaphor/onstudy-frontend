@@ -13,6 +13,7 @@ import Assignment from "./pages/Assignment";
 import Quiz from "./pages/Quiz";
 import { encryptData } from "./utils/Encryptor";
 import SyncStatusContext from "./components/SyncStatusContext";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   const page = sessionStorage.getItem("page");
@@ -145,7 +146,7 @@ export default function App() {
             <SyncStatusContext.Provider value={syncStatus}>
               <Navbar/>
             </SyncStatusContext.Provider>
-            {/* {page === "dashboard" && <Dashboard />} */}
+            {page === "dashboard" && <Dashboard />}
             {page === "classrooms" && <Classrooms />}
             {page === "assignments" && <Assignments />}
             {page === "classroom" && <Classroom />}
