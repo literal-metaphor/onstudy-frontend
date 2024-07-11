@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { api } from "../utils/API";
 import { ClassroomData } from "../utils/types/ClassroomData";
 
@@ -32,24 +32,7 @@ function Classroom({ id, name, teacher, subject}: { id: string, name: string, te
 
 export default function Classrooms() {
   const userData = JSON.parse(localStorage.getItem("userData")!);
-  const [classroomsData, setClassroomsData] = useState<ClassroomData[]>(JSON.parse(localStorage.getItem("classrooms")!));
-
-  const syncClassrooms = useCallback(async (): Promise<boolean> => {
-    try {
-      const response = await api.post("/classrooms/get_classrooms_by_user_id", { id: userData.id });
-      const classrooms: ClassroomData[] = response.data;
-      setClassroomsData(classrooms);
-      localStorage.setItem("classroomsData", JSON.stringify(classrooms));
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  }, [userData.id, setClassroomsData]);
-
-  useEffect(() => {
-    syncClassrooms();
-  }, [syncClassrooms]);
+  const [classroomsData, setClassroomsData] = useState<ClassroomData[]>(JSON.parse(localStorage.getItem("classroomsData")!));
 
   const createClassroomRef = useRef<HTMLButtonElement>(null);
   const joinClassroomRef = useRef<HTMLButtonElement>(null);
@@ -74,6 +57,10 @@ export default function Classrooms() {
       // Update classroom cache
       setClassroomsData([...classroomsData, classroom]);
       localStorage.setItem("classroomsData", JSON.stringify([...classroomsData, classroom]));
+
+      sessionStorage.setItem("page", "classroom");
+      sessionStorage.setItem("classroom_id", classroom.id);
+      location.reload();
     } catch (err) {
       console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);
@@ -106,6 +93,10 @@ export default function Classrooms() {
       // Update classroom cache
       setClassroomsData([...classroomsData, classroom]);
       localStorage.setItem("classroomsData", JSON.stringify([...classroomsData, classroom]));
+
+      sessionStorage.setItem("page", "classroom");
+      sessionStorage.setItem("classroom_id", classroom.id);
+      location.reload();
     } catch (err) {
       console.log(err);
       alert((err as { response: { data: { message: string } } }).response.data.message);
@@ -129,6 +120,7 @@ export default function Classrooms() {
 
           <div className="container w-fit p-4 flex flex-col justify-center items-center overflow-y-hidden">
             <form onSubmit={handleJoinClassroom} encType="multipart/form-data" className="p-4">
+              <h1 className="text-2xl font-semibold mb-4 text-center">Masuk Kelas</h1>
               <input
                 type="text"
                 name="classroom_id"
@@ -146,14 +138,14 @@ export default function Classrooms() {
           {/* Classrooms list */}
           <div className="col-span-8 border-r border-grey pe-4">
             {/* Filter */}
-            <div className="flex items-center btn w-fit">
+            <div className="flex items-center btn btn-ghost w-fit">
               <span className="text-3xl font-semibold me-3">Semua Kelas</span>
               <img src="ArrowDown.svg" alt="Arrow Down" className="w-[16px] h-[16px]" />
             </div>
 
             {/* Classrooms */}
             <div className="grid grid-cols-2">
-              {classroomsData && classroomsData[0] ? classroomsData.map((val, i) => (<Classroom key={i} id={val.id} name={val.name} teacher={val.teacher.name} subject={val.subject} />)) : (<p className="my-4">Kamu masih belum bergabung dengan kelas apapun.</p>)}
+              {classroomsData && classroomsData[0] ? classroomsData.map((val, i) => (<Classroom key={i} id={val.id} name={val.name} teacher={val.teacher.name} subject={val.subject} />)) : (<p className="my-4">Kamu masih belum bergabung dengan kelas apapun. <br /> <span onClick={() => location.reload()} className="text-blue hover:cursor-pointer hover:underline">Muat ulang jika Anda yakin ada kesalahan.</span></p>)}
             </div>
           </div>
 

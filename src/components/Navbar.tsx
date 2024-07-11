@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { api, store } from "../utils/API";
 import { UserData } from "../utils/types/UserData";
+import SyncStatusContext from "./SyncStatusContext";
 
 export default function Navbar() {
   const [userData, setUserData] = useState<UserData>(JSON.parse(localStorage.getItem("userData")!));
+  const syncStatus = useContext(SyncStatusContext);
 
   async function uploadPhoto(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -94,7 +96,7 @@ export default function Navbar() {
               <span className="text-sm">{userData.email}</span>
             </div>
           </div>
-          <img src="Sync.svg" alt="Sync cache" className={`w-[32px] h-[32px] hover:opacity-75 hover:cursor-pointer transition duration-300 active:scale-90`} />
+          <img src="Sync.svg" alt="Sync cache" className={`w-[32px] h-[32px] hover:opacity-75 hover:cursor-pointer transition duration-300 ${syncStatus === 1 && "animate-spin"}`} />
         </div>
       </div>
     </>

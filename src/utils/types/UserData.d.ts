@@ -1,4 +1,6 @@
-export interface UserData {
+import { PlainData } from "./PlainData";
+
+export interface UserData extends PlainData {
   id: string;
   email: string;
   name: string;

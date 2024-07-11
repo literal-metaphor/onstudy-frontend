@@ -1,0 +1,1 @@
+export type PlainData = { [key: string]: unknown };
